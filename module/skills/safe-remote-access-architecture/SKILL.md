@@ -4,6 +4,7 @@ description: Design remote access for vendors and engineers into OT with mandato
 version: 0.1.0
 license: Apache-2.0
 metadata:
+  skill_id: otics-ARC-safe-remote-access-architecture
   author: your-github-username
   frameworks:
     - IEC 62443-3-3

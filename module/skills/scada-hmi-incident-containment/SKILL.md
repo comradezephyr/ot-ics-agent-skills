@@ -4,6 +4,7 @@ description: Contain a compromised SCADA HMI without disrupting process control 
 version: 0.1.0
 license: Apache-2.0
 metadata:
+  skill_id: otics-IRR-scada-hmi-incident-containment
   author: your-github-username
   frameworks:
     - IEC 62443-2-1

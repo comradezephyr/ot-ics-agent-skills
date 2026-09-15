@@ -4,6 +4,7 @@ description: Design the DMZ between IT and OT covering service placement, data d
 version: 0.1.0
 license: Apache-2.0
 metadata:
+  skill_id: otics-ARC-dmz-architecture-for-ot
   author: your-github-username
   frameworks:
     - IEC 62443-3-3

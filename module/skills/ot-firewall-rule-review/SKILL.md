@@ -4,6 +4,7 @@ description: Review industrial firewall rule exports for any-any rules, overly b
 version: 0.1.0
 license: Apache-2.0
 metadata:
+  skill_id: otics-ASM-ot-firewall-rule-review
   author: your-github-username
   frameworks:
     - IEC 62443-3-3

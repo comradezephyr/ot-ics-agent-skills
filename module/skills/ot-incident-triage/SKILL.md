@@ -4,6 +4,7 @@ description: Triage an OT security incident in the first hour with safety-first 
 version: 0.1.0
 license: Apache-2.0
 metadata:
+  skill_id: otics-IRR-ot-incident-triage
   author: your-github-username
   frameworks:
     - IEC 62443-2-1

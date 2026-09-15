@@ -4,6 +4,7 @@ description: Enumerate DNP3 outstations, data link addresses, and function code 
 version: 0.1.0
 license: Apache-2.0
 metadata:
+  skill_id: otics-DIS-dnp3-outstation-inventory
   author: your-github-username
   frameworks:
     - IEC 62443-3-3

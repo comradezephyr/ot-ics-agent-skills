@@ -4,6 +4,7 @@ description: Detect lateral movement between Purdue levels including RDP and SMB
 version: 0.1.0
 license: Apache-2.0
 metadata:
+  skill_id: otics-MON-ot-lateral-movement-detection
   author: your-github-username
   frameworks:
     - IEC 62443-3-3

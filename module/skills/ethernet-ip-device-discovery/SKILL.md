@@ -4,6 +4,7 @@ description: Enumerate EtherNet/IP (CIP) devices on TCP 44818 and UDP 2222, capt
 version: 0.1.0
 license: Apache-2.0
 metadata:
+  skill_id: otics-DIS-ethernet-ip-device-discovery
   author: your-github-username
   frameworks:
     - IEC 62443-3-3

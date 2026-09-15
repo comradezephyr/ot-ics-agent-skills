@@ -4,6 +4,7 @@ description: Audit VPN configurations, jump hosts, and remote access paths into 
 version: 0.1.0
 license: Apache-2.0
 metadata:
+  skill_id: otics-ASM-ot-remote-access-audit
   author: your-github-username
   frameworks:
     - IEC 62443-3-3

@@ -4,6 +4,7 @@ description: Assess OT security program maturity against the C2M2 domains with M
 version: 0.1.0
 license: Apache-2.0
 metadata:
+  skill_id: otics-GOV-ot-security-program-maturity-assessment
   author: your-github-username
   frameworks:
     - C2M2

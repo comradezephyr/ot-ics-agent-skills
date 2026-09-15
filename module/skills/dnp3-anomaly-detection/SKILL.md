@@ -4,6 +4,7 @@ description: Build and run DNP3 anomaly detection with Suricata and Zeek rules c
 version: 0.1.0
 license: Apache-2.0
 metadata:
+  skill_id: otics-MON-dnp3-anomaly-detection
   author: your-github-username
   frameworks:
     - IEC 62443-3-3

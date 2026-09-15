@@ -4,6 +4,7 @@ description: Isolate a compromised OT network segment with minimal process impac
 version: 0.1.0
 license: Apache-2.0
 metadata:
+  skill_id: otics-IRR-ot-network-isolation-procedure
   author: your-github-username
   frameworks:
     - IEC 62443-2-1

@@ -4,6 +4,7 @@ description: Discover OPC UA servers on port 4840 and record their endpoints and
 version: 0.1.0
 license: Apache-2.0
 metadata:
+  skill_id: otics-DIS-opc-ua-endpoint-discovery
   author: your-github-username
   frameworks:
     - IEC 62443-3-3

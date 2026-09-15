@@ -4,6 +4,7 @@ description: Design zone and conduit boundaries for an OT network using Purdue l
 version: 0.1.0
 license: Apache-2.0
 metadata:
+  skill_id: otics-ARC-ot-network-segmentation-design
   author: your-github-username
   frameworks:
     - IEC 62443-3-2

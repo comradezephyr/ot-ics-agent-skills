@@ -4,6 +4,7 @@ description: Map data flows between PLCs, HMIs, and historians such as OSIsoft P
 version: 0.1.0
 license: Apache-2.0
 metadata:
+  skill_id: otics-DIS-historian-data-flow-mapping
   author: your-github-username
   frameworks:
     - IEC 62443-3-3

@@ -4,6 +4,7 @@ description: Passively captures and analyzes OT traffic from a SPAN port or TAP 
 version: 0.1.0
 license: Apache-2.0
 metadata:
+  skill_id: otics-DIS-passive-ot-network-discovery
   author: your-github-username
   frameworks:
     - IEC 62443-3-3

@@ -4,6 +4,7 @@ description: Audit zone and conduit definitions against the IEC 62443 zones and 
 version: 0.1.0
 license: Apache-2.0
 metadata:
+  skill_id: otics-ASM-purdue-model-zone-conduit-audit
   author: your-github-username
   frameworks:
     - IEC 62443-3-3

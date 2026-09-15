@@ -4,6 +4,7 @@ description: Assess a site against applicable NERC CIP standards, producing a re
 version: 0.1.0
 license: Apache-2.0
 metadata:
+  skill_id: otics-GOV-nerc-cip-compliance-check
   author: your-github-username
   frameworks:
     - NERC CIP

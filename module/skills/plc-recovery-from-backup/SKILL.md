@@ -4,6 +4,7 @@ description: Restore a compromised or corrupted PLC from a verified backup with 
 version: 0.1.0
 license: Apache-2.0
 metadata:
+  skill_id: otics-IRR-plc-recovery-from-backup
   author: your-github-username
   frameworks:
     - IEC 62443-2-1

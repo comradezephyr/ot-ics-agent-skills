@@ -4,6 +4,7 @@ description: Design role-based security awareness training for OT operators, eng
 version: 0.1.0
 license: Apache-2.0
 metadata:
+  skill_id: otics-GOV-ot-security-awareness-training-plan
   author: your-github-username
   frameworks:
     - IEC 62443-2-1

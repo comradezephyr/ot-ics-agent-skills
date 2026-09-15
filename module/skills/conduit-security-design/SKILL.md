@@ -4,6 +4,7 @@ description: Design the security specification for each conduit between OT zones
 version: 0.1.0
 license: Apache-2.0
 metadata:
+  skill_id: otics-ARC-conduit-security-design
   author: your-github-username
   frameworks:
     - IEC 62443-3-3

@@ -4,6 +4,7 @@ description: Build and run Modbus TCP anomaly detection with Suricata and Zeek r
 version: 0.1.0
 license: Apache-2.0
 metadata:
+  skill_id: otics-MON-modbus-anomaly-detection
   author: your-github-username
   frameworks:
     - IEC 62443-3-3

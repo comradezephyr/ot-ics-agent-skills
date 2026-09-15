@@ -4,6 +4,7 @@ description: Detect tampering with historian data including direct SQL writes ou
 version: 0.1.0
 license: Apache-2.0
 metadata:
+  skill_id: otics-MON-historian-tampering-detection
   author: your-github-username
   frameworks:
     - IEC 62443-3-3

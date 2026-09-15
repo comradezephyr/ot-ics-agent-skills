@@ -4,6 +4,7 @@ description: Review an OT incident response plan against the NIST SP 800-61 phas
 version: 0.1.0
 license: Apache-2.0
 metadata:
+  skill_id: otics-GOV-ot-incident-response-plan-review
   author: your-github-username
   frameworks:
     - NIST SP 800-61

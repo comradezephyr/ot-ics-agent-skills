@@ -4,6 +4,7 @@ description: Discover and fingerprint PROFINET devices on Layer 2 through DCP fr
 version: 0.1.0
 license: Apache-2.0
 metadata:
+  skill_id: otics-DIS-profinet-device-inventory
   author: your-github-username
   frameworks:
     - IEC 62443-3-3

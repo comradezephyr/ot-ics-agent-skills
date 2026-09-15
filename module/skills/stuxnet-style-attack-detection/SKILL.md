@@ -4,6 +4,7 @@ description: Detect logic tampering, sensor spoofing, and EWS-driven PLC writes 
 version: 0.1.0
 license: Apache-2.0
 metadata:
+  skill_id: otics-MON-stuxnet-style-attack-detection
   author: your-github-username
   frameworks:
     - IEC 62443-3-3

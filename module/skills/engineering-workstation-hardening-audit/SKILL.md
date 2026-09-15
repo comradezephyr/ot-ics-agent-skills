@@ -4,6 +4,7 @@ description: Audit OT engineering workstations (EWS) for hardening gaps covering
 version: 0.1.0
 license: Apache-2.0
 metadata:
+  skill_id: otics-ASM-engineering-workstation-hardening-audit
   author: your-github-username
   frameworks:
     - IEC 62443-3-3
