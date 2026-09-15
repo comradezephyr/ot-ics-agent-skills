@@ -5,7 +5,7 @@ version: 0.1.0
 license: Apache-2.0
 metadata:
   skill_id: otics-GOV-ot-security-program-maturity-assessment
-  author: your-github-username
+  author: comradezephyr
   frameworks:
     - C2M2
     - NIST SP 800-82r3

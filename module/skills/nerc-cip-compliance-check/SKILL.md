@@ -5,7 +5,7 @@ version: 0.1.0
 license: Apache-2.0
 metadata:
   skill_id: otics-GOV-nerc-cip-compliance-check
-  author: your-github-username
+  author: comradezephyr
   frameworks:
     - NERC CIP
     - NIST SP 800-82r3

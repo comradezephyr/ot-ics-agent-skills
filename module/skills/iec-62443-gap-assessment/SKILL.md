@@ -5,7 +5,7 @@ version: 0.1.0
 license: Apache-2.0
 metadata:
   skill_id: otics-ASM-iec-62443-gap-assessment
-  author: your-github-username
+  author: comradezephyr
   frameworks:
     - IEC 62443-3-3
     - NIST CSF 2.0

@@ -5,7 +5,7 @@ version: 0.1.0
 license: Apache-2.0
 metadata:
   skill_id: otics-GOV-ot-incident-response-plan-review
-  author: your-github-username
+  author: comradezephyr
   frameworks:
     - NIST SP 800-61
     - NIST SP 800-82r3
