@@ -1,3 +1,5 @@
+# Copyright 2026 comradezephyr
+# SPDX-License-Identifier: Apache-2.0
 """Validate every skill under module/skills/."""
 
 import sys
