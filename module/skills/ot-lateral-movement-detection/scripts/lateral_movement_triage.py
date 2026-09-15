@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# Copyright 2026 comradezephyr
+# SPDX-License-Identifier: Apache-2.0
 """Classify observed flows as adjacent or non-adjacent Purdue level crossings."""
 
 import argparse

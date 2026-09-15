@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# Copyright 2026 comradezephyr
+# SPDX-License-Identifier: Apache-2.0
 """Triage Suricata eve.json alerts for Modbus rules into a grouped runbook."""
 
 import argparse

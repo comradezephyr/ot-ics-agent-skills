@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# Copyright 2026 comradezephyr
+# SPDX-License-Identifier: Apache-2.0
 """Compare uploaded S7 blocks against a stored baseline."""
 
 import argparse

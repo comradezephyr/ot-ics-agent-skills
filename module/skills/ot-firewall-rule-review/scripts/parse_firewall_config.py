@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# Copyright 2026 comradezephyr
+# SPDX-License-Identifier: Apache-2.0
 """Parse a firewall rule export and flag segmentation findings."""
 
 import argparse

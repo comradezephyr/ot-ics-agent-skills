@@ -1,4 +1,6 @@
 #Requires -Version 5.1
+# Copyright 2026 comradezephyr
+# SPDX-License-Identifier: Apache-2.0
 <#
 .SYNOPSIS
 Collect EWS hardening state as JSON. Read-only.

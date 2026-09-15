@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# Copyright 2026 comradezephyr
+# SPDX-License-Identifier: Apache-2.0
 """Enumerate Modbus register windows for a unit and write a CSV."""
 
 import argparse

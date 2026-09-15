@@ -1,4 +1,6 @@
 #!/usr/bin/env sh
+# Copyright 2026 comradezephyr
+# SPDX-License-Identifier: Apache-2.0
 set -eu
 
 CAP=${1:?usage: flow_report.sh capture.pcapng}

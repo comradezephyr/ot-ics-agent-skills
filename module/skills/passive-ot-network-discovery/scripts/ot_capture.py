@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# Copyright 2026 comradezephyr
+# SPDX-License-Identifier: Apache-2.0
 """Passively capture OT discovery traffic from a SPAN or TAP to a pcapng file."""
 
 import argparse
