@@ -25,21 +25,21 @@ These runbooks were assembled against IEC 62443-3-3, NIST SP 800-82 Rev. 3, and 
 ### Cline
 
 ```
-git clone <repo-url> ot-ics-agent-skills
+git clone https://github.com/comradezephyr/ot-ics-agent-skills.git ot-ics-agent-skills
 cp -r ot-ics-agent-skills/module/. ~/.cline/skills/
 ```
 
 ### Claude Code
 
 ```
-git clone <repo-url> ot-ics-agent-skills
+git clone https://github.com/comradezephyr/ot-ics-agent-skills.git ot-ics-agent-skills
 cp -r ot-ics-agent-skills/module/. ~/.claude/skills/
 ```
 
 ### Cursor
 
 ```
-git clone <repo-url> ot-ics-agent-skills
+git clone https://github.com/comradezephyr/ot-ics-agent-skills.git ot-ics-agent-skills
 cp -r ot-ics-agent-skills/module/. ~/.cursor/skills/
 ```
 
