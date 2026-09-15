@@ -1,4 +1,4 @@
-# OT/ICS Agent Skills
+﻿# OT/ICS Agent Skills
 
 ## What This Is
 
@@ -30,64 +30,64 @@ Mappings are traceability aids. They mark which framework section a step satisfi
 
 ## Skill Index
 
-Every entry is a directory under `module/skills/`. A skill tagged (planned) has not been written yet.
+Every entry is a directory under `module/skills/`. All skills are written and validated.
 
 ### Discovery and Inventory
 
-- `passive-ot-network-discovery` (planned): passive protocol analysis to inventory OT assets without active scanning
-- `modbus-device-enumeration` (planned): enumerate Modbus TCP/RTU devices, function codes, register maps
-- `profinet-device-inventory` (planned): discover and fingerprint PROFINET devices via DCP
-- `ethernet-ip-device-discovery` (planned): enumerate EtherNet/IP (CIP) devices and object models
-- `opc-ua-endpoint-discovery` (planned): discover OPC UA servers and security policies
-- `dnp3-outstation-inventory` (planned): enumerate DNP3 outstations and capabilities
-- `historian-data-flow-mapping` (planned): map flows between PLCs, HMIs, historians
+- `passive-ot-network-discovery`: passive protocol analysis to inventory OT assets without active scanning
+- `modbus-device-enumeration`: enumerate Modbus TCP/RTU devices, function codes, register maps
+- `profinet-device-inventory`: discover and fingerprint PROFINET devices via DCP
+- `ethernet-ip-device-discovery`: enumerate EtherNet/IP (CIP) devices and object models
+- `opc-ua-endpoint-discovery`: discover OPC UA servers and security policies
+- `dnp3-outstation-inventory`: enumerate DNP3 outstations and capabilities
+- `historian-data-flow-mapping`: map flows between PLCs, HMIs, historians
 
 ### Assessment and Audit
 
-- `iec-62443-gap-assessment` (planned): assess against IEC 62443-3-3 system security requirements
-- `purdue-model-zone-conduit-audit` (planned): audit zones and conduits against Purdue architecture
-- `nist-800-82-control-mapping` (planned): map existing controls to NIST SP 800-82 Rev. 3
-- `plc-logic-integrity-check` (planned): compare running PLC logic to known-good baseline
-- `ot-remote-access-audit` (planned): audit VPN, jump host, and remote paths into OT
-- `engineering-workstation-hardening-audit` (planned): assess EWS hardening gaps
-- `ot-firewall-rule-review` (planned): review industrial firewall rules for permissive conduits
+- `iec-62443-gap-assessment`: assess against IEC 62443-3-3 system security requirements
+- `purdue-model-zone-conduit-audit`: audit zones and conduits against Purdue architecture
+- `nist-800-82-control-mapping`: map existing controls to NIST SP 800-82 Rev. 3
+- `plc-logic-integrity-check`: compare running PLC logic to known-good baseline
+- `ot-remote-access-audit`: audit VPN, jump host, and remote paths into OT
+- `engineering-workstation-hardening-audit`: assess EWS hardening gaps
+- `ot-firewall-rule-review`: review industrial firewall rules for permissive conduits
 
 ### Monitoring and Detection
 
-- `modbus-anomaly-detection` (planned): detect anomalous Modbus function codes, register access, timing
-- `dnp3-anomaly-detection` (planned): detect DNP3 anomalies including spoofed responses
-- `profinet-anomaly-detection` (planned): detect PROFINET device spoofing and cycle disruption
-- `stuxnet-style-attack-detection` (planned): detect PLC logic tampering, sensor spoofing, EWS compromise
-- `historian-tampering-detection` (planned): detect unauthorized modifications to historian data
-- `ot-lateral-movement-detection` (planned): detect lateral movement between Purdue levels
-- `safety-instrumented-system-anomaly-detection` (planned): monitor SIS for anomalous trips and bypasses
+- `modbus-anomaly-detection`: detect anomalous Modbus function codes, register access, timing
+- `dnp3-anomaly-detection`: detect DNP3 anomalies including spoofed responses
+- `profinet-anomaly-detection`: detect PROFINET device spoofing and cycle disruption
+- `stuxnet-style-attack-detection`: detect PLC logic tampering, sensor spoofing, EWS compromise
+- `historian-tampering-detection`: detect unauthorized modifications to historian data
+- `ot-lateral-movement-detection`: detect lateral movement between Purdue levels
+- `safety-instrumented-system-anomaly-detection`: monitor SIS for anomalous trips and bypasses
 
 ### Incident Response
 
-- `ot-incident-triage` (planned): triage with safety-first decision gates
-- `plc-recovery-from-backup` (planned): restore PLC from verified backup with rollback plan
-- `scada-hmi-incident-containment` (planned): contain compromised HMI without process disruption
-- `ot-network-isolation-procedure` (planned): isolate compromised segment with minimal process impact
-- `ransomware-response-in-ot` (planned): respond without shutting down production
-- `supply-chain-compromise-response-ot` (planned): respond to compromised vendor-supplied component
-- `post-incident-ot-forensics` (planned): preserve forensic evidence from OT devices
+- `ot-incident-triage`: triage with safety-first decision gates
+- `plc-recovery-from-backup`: restore PLC from verified backup with rollback plan
+- `scada-hmi-incident-containment`: contain compromised HMI without process disruption
+- `ot-network-isolation-procedure`: isolate compromised segment with minimal process impact
+- `ransomware-response-in-ot`: respond without shutting down production
+- `supply-chain-compromise-response-ot`: respond to compromised vendor-supplied component
+- `post-incident-ot-forensics`: preserve forensic evidence from OT devices
 
 ### Architecture and Design
 
-- `ot-network-segmentation-design` (planned): design segmentation using Purdue and IEC 62443 zones
-- `conduit-security-design` (planned): design secure conduits between OT zones
-- `dmz-architecture-for-ot` (planned): design a DMZ between IT and OT networks
-- `safe-remote-access-architecture` (planned): design safe remote access for vendors and engineers
-- `ot-backup-and-recovery-design` (planned): design backup and recovery for PLCs, HMIs, historians
-- `ot-change-management-workflow` (planned): design change management that maintains controls
-- `it-ot-convergence-risk-assessment` (planned): assess risks from IT/OT convergence
+- `ot-network-segmentation-design`: design segmentation using Purdue and IEC 62443 zones
+- `conduit-security-design`: design secure conduits between OT zones
+- `dmz-architecture-for-ot`: design a DMZ between IT and OT networks
+- `safe-remote-access-architecture`: design safe remote access for vendors and engineers
+- `ot-backup-and-recovery-design`: design backup and recovery for PLCs, HMIs, historians
+- `ot-change-management-workflow`: design change management that maintains controls
+- `it-ot-convergence-risk-assessment`: assess risks from IT/OT convergence
 
 ### Compliance and Governance
 
-- `nerc-cip-compliance-check` (planned): assess NERC CIP compliance
-- `iec-62443-certification-readiness` (planned): prepare for IEC 62443 certification
-- `ot-security-program-maturity-assessment` (planned): assess maturity against C2M2
-- `ot-vendor-risk-assessment` (planned): assess security risk of OT vendors and suppliers
-- `ot-incident-response-plan-review` (planned): review and improve an OT IR plan
-- `ot-security-awareness-training-plan` (planned): design training for OT operators and engineers
-- `ot-asset-ownership-governance` (planned): establish governance for OT asset ownership
+- `nerc-cip-compliance-check`: assess NERC CIP compliance
+- `iec-62443-certification-readiness`: prepare for IEC 62443 certification
+- `ot-security-program-maturity-assessment`: assess maturity against C2M2
+- `ot-vendor-risk-assessment`: assess security risk of OT vendors and suppliers
+- `ot-incident-response-plan-review`: review and improve an OT IR plan
+- `ot-security-awareness-training-plan`: design training for OT operators and engineers
+- `ot-asset-ownership-governance`: establish governance for OT asset ownership
