@@ -18,6 +18,8 @@ Generic agents break in OT. They guess protocol commands. They fabricate tool ou
 
 This pack forces structure. Every skill has explicit trigger conditions, real commands, and verification steps. The agent works inside that track. Nothing executes until prerequisites and approval gates pass, and nothing is called done until the verification steps pass too.
 
+These runbooks were assembled against IEC 62443-3-3, NIST SP 800-82 Rev. 3, and MITRE ATT&CK for ICS as those frameworks stood in early 2026. Framework versions change. Where a control or technique citation is load-bearing for a workflow, verify it against the current published version before relying on it.
+
 ## Quick Start
 
 ### Cline
