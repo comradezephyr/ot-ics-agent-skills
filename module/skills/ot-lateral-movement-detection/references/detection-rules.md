@@ -41,19 +41,44 @@ alert tcp $VENDOR_TUNNEL any -> $OT_NETS any (msg:"ICS vendor tunnel outside app
 
 ## Zeek analysis
 
-Level classification and adjacency from `conn.log`. The triage script consumes Zeek output and `purdue-map.csv` directly, so a full Zeek policy is optional. For a Zeek-native alert path:
+Level classification and adjacency from `conn.log`. The triage script consumes Zeek output and `purdue-map.csv` directly, so a full Zeek policy is optional. For a Zeek-native alert path, keep the OT subnets in the script in sync with `purdue-map.csv` and save it as `site/lateral-movement.zeek`:
 
 ```zeek
 @load base/protocols/conn
+@load base/frameworks/notice
+
+module CrossingWatch;
+
+export {
+    redef enum Notice::Type += { Management_From_Outside };
+
+    ## Keep in sync with purdue-map.csv.
+    const ot_nets: set[subnet] = {
+        10.0.1.0/24,
+        10.0.2.0/24,
+    } &redef;
+}
+
+function in_ot(a: addr): bool
+    {
+    for ( net in ot_nets )
+        if ( a in net )
+            return T;
+    return F;
+    }
 
 event conn_established(c: connection)
     {
     local src = c$id$orig_h;
     local dst = c$id$resp_h;
-    local svc = c$id$resp_p;
-    if ( svc == 3389/tcp && Site::is_local_addr(dst) && !Site::is_local_addr(src) )
-        NOTICE([$note=Netflow::Crossing, $src=src, $dst=dst,
-                $msg=fmt("rdp crossing from %s to %s", src, dst)]);
+
+    if ( c$id$resp_p != 3389/tcp )
+        return;
+    if ( ! in_ot(dst) || in_ot(src) )
+        return;
+
+    NOTICE([$note=Management_From_Outside, $src=src, $dst=dst,
+            $msg=fmt("rdp crossing from %s to %s", src, dst)]);
     }
 ```
 
