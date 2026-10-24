@@ -41,58 +41,89 @@ alert tcp any any -> $PLC_SERVERS 502 (msg:"ICS modbus write outside shift hours
 
 ## Zeek policy
 
-New master-slave pairs and unit ID spoofing. Zeek's modbus analyzer provides `ModbusHeaders` with `function_code` and `unit_id`. The script below alerts on pairs not present in the baseline file `site/modbus-baseline.tsv` (columns: src, dst, unit).
+One script covers both detections. Zeek's modbus analyzer supplies `ModbusHeaders` with `unit_id` and `function_code`, so no byte parsing is needed here. Save the script as `site/modbus-anomaly.zeek`. The baseline file `site/modbus-baseline.tsv` holds one `src,dst,unit` line per authorized pair with no header. Relocate it with `redef ModbusAnomaly::baseline_file` in `site/local.zeek`.
 
 ```zeek
 @load base/protocols/modbus
+@load base/frameworks/input
+@load base/frameworks/logging
+@load base/frameworks/notice
+
+module ModbusAnomaly;
 
 export {
-    redef enum Log::ID += { MODBUS_ANOMALY };
+    redef enum Log::ID += { LOG };
+
+    type Info: record {
+        ts: time &log;
+        src: addr &log;
+        dst: addr &log;
+        unit: count &log;
+        function_code: count &log;
+        note: string &log;
+    };
+
+    ## Index record for the baseline file, one pair per line.
+    type PairIdx: record {
+        pair: string;
+    };
+
+    const baseline_file = "site/modbus-baseline.tsv" &redef;
+
     global baseline: set[string];
+
+    redef enum Notice::Type += { Write_Storm };
 }
+
+const write_storm_threshold = 50 &redef;
+
+global write_counts: table[addr] of count &default=0;
 
 event zeek_init()
     {
-    Input::add_table([$source="site/modbus-baseline.tsv", $table=baseline,
-                      $idx=IdxPair, $val=ValNone, $want_record=F]);
+    Log::create_stream(ModbusAnomaly::LOG, [$columns=Info, $path="modbus_anomaly"]);
+    # $val stays unset because the destination is a set.
+    Input::add_table([$source=baseline_file, $name="modbus-baseline",
+                      $idx=PairIdx, $destination=baseline]);
     }
 
-type IdxPair: record {
-    src: string;
-    dst: string;
-    unit: string;
-};
+function pair_key(c: connection, headers: ModbusHeaders): string
+    {
+    return fmt("%s,%s,%d", c$id$orig_h, c$id$resp_h, headers$unit_id);
+    }
 
 event modbus_message(c: connection, headers: ModbusHeaders, is_orig: bool)
     {
     if ( is_orig )
         return;
-    local key = fmt("%s,%s,%d", c$id$orig_h, c$id$resp_h, headers$unit_id);
+
+    local key = pair_key(c, headers);
     if ( key !in baseline )
-        Log::write(MODBUS_ANOMALY, [$ts=network_time(), $src=c$id$orig_h,
-                   $dst=c$id$resp_h, $unit=headers$unit_id,
-                   $fc=headers$function_code, $note="unseen master-slave-unit pair"]);
+        Log::write(ModbusAnomaly::LOG, Info($ts=network_time(),
+                                            $src=c$id$orig_h,
+                                            $dst=c$id$resp_h,
+                                            $unit=headers$unit_id,
+                                            $function_code=headers$function_code,
+                                            $note="unseen master-slave-unit pair"));
     }
-```
-
-Rapid write counting in Zeek, complementary to the Suricata detection filter:
-
-```zeek
-global write_counts: table[addr] of count &default=0;
 
 event modbus_message(c: connection, headers: ModbusHeaders, is_orig: bool)
     {
-    if ( !is_orig )
+    if ( ! is_orig )
         return;
-    if ( headers$function_code in {5, 6, 15, 16} )
+
+    if ( headers$function_code in set(0x05, 0x06, 0x0F, 0x10) )
         {
         write_counts[c$id$orig_h] += 1;
-        if ( write_counts[c$id$orig_h] > 50 )
-            NOTICE([$note=Modbus::Write_Storm, $src=c$id$orig_h,
-                    $msg=fmt("over 50 modbus writes from %s", c$id$orig_h)]);
+        if ( write_counts[c$id$orig_h] == write_storm_threshold + 1 )
+            NOTICE([$note=Write_Storm, $src=c$id$orig_h,
+                    $msg=fmt("%d write requests from %s",
+                             write_counts[c$id$orig_h], c$id$orig_h)]);
         }
     }
 ```
+
+Two handlers on the same event are legal. Zeek runs both in the order they are declared.
 
 ## Test evidence
 
@@ -101,4 +132,6 @@ Each rule ships with a replay test. Capture a scripted write sequence with tshar
 `suricata -r modbus-test.pcapng -c /etc/suricata/suricata.yaml -l test-output/`
 
 Expected: one `alert` entry per rule in `test-output/eve.json` with the matching `signature_id`. Record the test date per sid in the triage runbook.
+
+The Zeek script must load before it goes near a sensor: `zeek -C -r modbus-test.pcapng site/modbus-anomaly.zeek`. A parse error stops the run before any log is written, so a missing `modbus_anomaly.log` on replay is a load failure, not a quiet segment.
 
