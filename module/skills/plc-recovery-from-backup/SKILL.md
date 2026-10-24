@@ -26,10 +26,10 @@ metadata:
 - A second known-good backup for the rollback plan.
 - Maintenance window approved by the operations manager.
 - Connection type and rack/slot data per the controller inventory.
-- python-snap7 or the vendor download tool for the platform.
+- python-snap7 2.0 or newer, or the vendor download tool for the platform.
 - Credentials: engineering access on the controller.
 - Authorization: operations manager approves the restore. Safety engineer confirms the process can tolerate the controller stopping.
-- Upstream skills: `plc-logic-integrity-check` for the baseline hash method. This skill reuses its verification approach.
+- Upstream skills: `plc-logic-integrity-check` for the baseline hash method and the `plc_logic_integrity.py` capture and compare steps. The commands below call it as `$SKILLS/plc-logic-integrity-check/scripts/plc_logic_integrity.py`, where `$SKILLS` is the installed skills directory, for example `~/.cline/skills`.
 
 ### Safety
 
@@ -47,16 +47,16 @@ This skill is active. Every step that touches the controller is gated in the Wor
 2. Record the rollback plan. Before any change, capture the controller's current state: logic hash, CPU mode, and configuration export. The rollback plan is: restore this state if the new state fails verification. If no pre-change capture is possible because the controller is already compromised, the rollback plan is the second verified backup.
 3. Confirm the target identity and state:
    > STOP: Confirm change control approval before executing this step. If approval is missing, halt and report.
-   `python3 -c "import snap7; c=snap7.client.Client(); c.Connect('<ip>',0,<slot>); i=c.GetCpuInfo(); print(i.ModuleTypeName, i.CpuState)"`
+   `python3 -c "import snap7; c=snap7.client.Client(); c.set_connection_type(1); c.connect('<ip>',0,<slot>); i=c.get_cpu_info(); print(i.ModuleTypeName, i.CpuState); c.disconnect()"`
    Confirm the module type matches the backup's target controller. A mismatch aborts the restore.
 4. Confirm the maintenance window with the operations manager. This step will interrupt process. The controller must stop to accept a restore. Confirm with operations before proceeding and record the approval time.
 5. Apply the restore:
    > STOP: Confirm change control approval before executing this step. If approval is missing, halt and report.
-   `python3 module/skills/plc-logic-integrity-check/scripts/plc_logic_integrity.py --ip <ip> --rack 0 --slot 1 --blocks <blocks> --baseline-dir restore/ --capture`
+   `python3 $SKILLS/plc-logic-integrity-check/scripts/plc_logic_integrity.py --ip <ip> --rack 0 --slot 1 --blocks <blocks> --baseline-dir restore/ --capture`
    Then download the verified logic with the vendor tool or snap7 upload in reverse. Use the vendor download procedure for the platform. Restore execution follows the vendor's download procedure. The skill defines the gates around it.
 6. Verify the logic matches the backup:
    > STOP: Confirm change control approval before executing this step. If approval is missing, halt and report.
-   `python3 module/skills/plc-logic-integrity-check/scripts/plc_logic_integrity.py --ip <ip> --rack 0 --slot 1 --blocks <blocks> --baseline-dir restore/ --out plc-recovery-record.md`
+   `python3 $SKILLS/plc-logic-integrity-check/scripts/plc_logic_integrity.py --ip <ip> --rack 0 --slot 1 --blocks <blocks> --baseline-dir restore/ --out plc-recovery-record.md`
    Status must be MATCH for every block.
 7. Return the controller to RUN and confirm the process state:
    - CPU state returns to 8 (RUN).
