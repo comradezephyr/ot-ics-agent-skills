@@ -34,7 +34,7 @@ metadata:
 
 This skill is active. Collection touches live workstations and is gated in the Workflow section.
 
-- Active. Reads live OS state over WinRM. No configuration changes. Requires change control approval.
+- Active. Reads live OS state over WinRM. No configuration changes, but it opens a remote session to a production workstation, which is what puts it behind change control. Collection at the console needs only the workstation owner present.
 
 ## Workflow
 
