@@ -45,8 +45,8 @@ This skill is passive by default. Active steps are gated in the Workflow section
 2. Author the ruleset from `references/detection-rules.md`. Fill the site variables. All rules use the native `dnp3:` keyword.
 3. Validate the ruleset offline:
    `suricata -T -c /etc/suricata/suricata.yaml`
-4. Validate the Zeek policy offline against the baseline capture:
-   `zeek -C -r baseline.pcapng scripts/dnp3-anomaly`
+4. Validate the Zeek policy offline against the baseline capture. Save the policy from `references/detection-rules.md` as `site/dnp3-anomaly.zeek`:
+   `zeek -C -r baseline.pcapng site/dnp3-anomaly.zeek`
 5. Deploy the ruleset to the IDS:
    > STOP: Confirm change control approval before executing this step. If approval is missing, halt and report.
    Copy the rules to the sensor, then `suricatasc -c reload-rules`.
