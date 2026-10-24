@@ -22,30 +22,21 @@ These runbooks were assembled against IEC 62443-3-3, NIST SP 800-82 Rev. 3, and 
 
 ## Quick Start
 
-### Cline
-
-```
-git clone https://github.com/comradezephyr/ot-ics-agent-skills.git ot-ics-agent-skills
-cp -r ot-ics-agent-skills/module/. ~/.cline/skills/
-```
-
-### Claude Code
-
-```
-git clone https://github.com/comradezephyr/ot-ics-agent-skills.git ot-ics-agent-skills
-cp -r ot-ics-agent-skills/module/. ~/.claude/skills/
+```sh
+# Set HOST_DIR per host: ~/.cline/skills, ~/.claude/skills, or ~/.cursor/skills
+HOST_DIR=~/.cline/skills
+git clone https://github.com/comradezephyr/ot-ics-agent-skills.git
+mkdir -p "$HOST_DIR"
+cp -r ot-ics-agent-skills/module/skills/* "$HOST_DIR"
+rm -rf "$HOST_DIR/_template"
+cp ot-ics-agent-skills/module/AGENTS.md ./AGENTS.md
 ```
 
-### Cursor
+`_template` is the authoring scaffold, not a skill. Remove it after install so the host does not load a placeholder. `AGENTS.md` is the module-level context the agent reads alongside the runbooks, so it goes where your host reads agent instructions, usually the workspace root.
 
-```
-git clone https://github.com/comradezephyr/ot-ics-agent-skills.git ot-ics-agent-skills
-cp -r ot-ics-agent-skills/module/. ~/.cursor/skills/
-```
+Path names are per host. Adjust `HOST_DIR` to whatever directory your host reads for agent skills.
 
-Path names are per host. Adjust `~/.cursor/skills/` to whatever directory your Cursor install reads for agent rules.
-
-On Windows, replace `cp -r <src> <dst>` with `Copy-Item -Recurse -Force <src> <dst>` in PowerShell.
+On Windows, replace the copy steps with `Copy-Item -Recurse -Force .\module\skills\* $HOST_DIR` and `Remove-Item -Recurse -Force "$HOST_DIR\_template"` in PowerShell.
 
 ## What's Inside
 
@@ -59,6 +50,8 @@ On Windows, replace `cp -r <src> <dst>` with `Copy-Item -Recurse -Force <src> <d
 | Compliance and Governance | 7 |
 
 See the full list, up to date, in `module/AGENTS.md`.
+
+Each skill ships `references/standards.md`, which expands every framework row with why it applies and which step it anchors. Skills that gather input or produce documents ship the matching template as well.
 
 ## Framework Coverage
 
@@ -74,10 +67,26 @@ See the full list, up to date, in `module/AGENTS.md`.
 module/skills/
   passive-ot-network-discovery/
     SKILL.md
+    references/
+      standards.md
+      detection-rules.md
     scripts/
+      ot_capture.py
 ```
 
-`SKILL.md` is always present. It contains five sections in order: When to Use, Prerequisites, Workflow, Verification, Framework Mappings. The `scripts/` directory is optional and holds any commands the runbook invokes.
+`SKILL.md` is always present. It contains five sections in order: When to Use, Prerequisites, Workflow, Verification, Framework Mappings. Prerequisites carries a `### Safety` subsection that states whether the skill is passive or active.
+
+`references/standards.md` is always present. It expands every row of the Framework Mappings table with why the control applies and which workflow step it anchors. Other reference files are optional and depend on the skill type: `questionnaire.md` for skills that gather input through questions, `design-template.md` and `assessment-template.md` for document production, `plan-template.md` for plans, `decision-matrix.md` for branching procedures, and `detection-rules.md` for rule sets.
+
+`scripts/` is optional and holds the commands the runbook invokes. Every script runs against the libraries named in Prerequisites, with no pseudocode.
+
+## Validation
+
+```sh
+python scripts/validate_all.py
+```
+
+The validator prints a count per category and `Validated 42 skills. 0 failed.`, and exits non-zero on any failure. It checks the frontmatter and metadata block, the five sections and their order, the Safety declaration and the STOP and SAFETY gates, every framework row against `references/standards.md`, every reference file against the runbook that must cite it, the writing rules, and that each bundled script parses. CI runs the same command on every push to `main` and on every pull request.
 
 ## Safety
 

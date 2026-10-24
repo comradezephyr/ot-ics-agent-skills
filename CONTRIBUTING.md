@@ -6,7 +6,7 @@ This repo accepts two kinds of contribution: new skills, and corrections to exis
 
 Every skill must include:
 
-- `SKILL.md`: the runbook. Starts with the YAML frontmatter (name, description, version, license, metadata), then exactly five H2 sections in this order: When to Use, Prerequisites, Workflow, Verification, Framework Mappings.
+- `SKILL.md`: the runbook. Starts with the YAML frontmatter (name, description, version, license, metadata with `skill_id` and `author`), then exactly five H2 sections in this order: When to Use, Prerequisites, Workflow, Verification, Framework Mappings. It cites `references/standards.md` and every other file that ships under `references/`.
 - `references/standards.md`: expands every row of the Framework Mappings table with why it applies and to which step.
 - Optional, depending on skill type:
   - `references/questionnaire.md` for skills that gather input through questions (assessments, reviews, plans).
@@ -58,9 +58,16 @@ Run before opening a PR:
 python scripts/validate_all.py
 ```
 
-It must print `Validated N skills. 0 failed.` and exit 0, where N is the total skill count. The validator checks `SKILL.md` presence, frontmatter, required fields, name and directory match, description length and OT keyword, and the five H2 sections in order.
+It must print `Validated N skills. 0 failed.` and exit 0, where N is the total skill count. The validator checks:
 
-CI runs the same validator on every PR and rejects PRs that fail it. Fix the validator output before requesting review. Do not modify the validator to make a skill pass.
+- `SKILL.md` presence and frontmatter: `license` is Apache-2.0, `version` is three-part, `name` matches the directory, and `description` is within 1024 characters with an OT trigger keyword.
+- `metadata.author`, `metadata.skill_id`, and `metadata.frameworks`. The skill ID is canonical for the directory and unique across the pack.
+- The five H2 sections in order, and the `### Safety` subsection with an active or passive declaration. Design and governance skills must use their exact sentence. Incident response skills must carry a SAFETY gate, and active skills must carry a STOP gate.
+- `references/standards.md` with `## Update Rules`, every Framework Mappings row expanded in it, and every file under `references/` cited from `SKILL.md`.
+- Writing rules on every markdown file: no em dashes, no banned words, no emojis, no CRLF, no trailing whitespace, no byte order mark.
+- Every bundled Python script compiles and every shell script passes `sh -n`.
+
+CI runs `python scripts/validate_all.py` on every push to `main` and on every pull request, and rejects PRs that fail it. Fix the validator output before requesting review. Do not modify the validator to make a skill pass.
 
 ## Safety Rules
 
