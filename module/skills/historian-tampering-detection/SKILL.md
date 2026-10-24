@@ -42,10 +42,10 @@ This skill is passive by default. Queries run read-only against the audit trail 
 2. Collect the audit trail for the review window. PI: `piarchmanager` audit trail. Wonderware: audit views. SQL Server: `sys.fn_get_audit_file`. PostgreSQL: pgaudit logs. The bundled `historian_audit_queries.sql` file has the working queries per platform.
    > STOP: Confirm change control approval before executing this step. If approval is missing, halt and report.
    The gate covers queries against the production historian. An exported copy of the audit trail and archive can be reviewed without it.
-3. Run the out-of-path write query. Any INSERT or UPDATE on a tag table from an account or source host not on the approved writer list is a finding.
-4. Run the backfill query. Values written with timestamps older than the collector scan interval are backfill candidates. Backfill with no maintenance record is a finding.
-5. Run the timestamp anomaly query. Timestamps out of order within a tag, duplicate timestamps with different values, or values at sub-scan intervals indicate direct manipulation.
-6. Run the retention deletion query. Early deletion of archive blocks or events is a finding. Compare the retention policy against actual archive extents.
+3. Run the out-of-path write query. Any INSERT or UPDATE on a tag table from an account or source host not on the approved writer list is a finding. Query IDs: Q1 for PI, Q4 or Q5 for SQL Server, Q6 or Q6b for PostgreSQL.
+4. Run the backfill query, Q2. Values written with timestamps older than the collector scan interval are backfill candidates. Backfill with no maintenance record is a finding.
+5. Run the timestamp anomaly query, Q3. Timestamps out of order within a tag, duplicate timestamps with different values, or values at sub-scan intervals indicate direct manipulation.
+6. Run the retention deletion query, Q7. Early deletion of archive blocks or events is a finding. Compare the retention policy against actual archive extents.
 7. Compare the current archive against the baseline snapshot for the target tags:
    `diff tags-baseline.csv tags-current.csv > tag-diff.txt`
    A value change with no matching collector event in the audit trail is a finding.
