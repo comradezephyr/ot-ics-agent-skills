@@ -148,7 +148,7 @@ event packet_contents(c: connection, contents: string)
         return;
 
     local fid = word_at(contents, frame_id_offset);
-    local mac = c$orig_l2_addr;
+    local mac = c$orig$l2_addr;
 
     if ( fid >= dcp_frame_first && fid <= dcp_frame_last )
         {
