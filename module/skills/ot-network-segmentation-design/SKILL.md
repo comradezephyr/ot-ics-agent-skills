@@ -67,3 +67,5 @@ This skill is passive. It produces design documents only.
 | NIST CSF 2.0 | GV | Govern. Family level. Zone ownership and SL-T acceptance are governance decisions. |
 | ATT&CK for ICS | T0886 | Remote Services. Segmentation bounds the reach of a compromised remote path. |
 
+
+Row-by-row justification lives in `references/standards.md`.

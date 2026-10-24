@@ -35,7 +35,7 @@ This skill is passive. It produces assessment and governance documents only.
 
 ## Workflow
 
-1. Define the role set from OT touchpoints. Requirement: topics match what each role can actually break or protect. Anchor: IEC 62443-2-1 4.3.2.4.3. Decision: roles are operators, control engineers, EWS users, contractors, and executives. Trade-off accepted: finer role granularity improves relevance and multiplies the content maintenance burden. A role with a distinct OT touchpoint gets its own topic set.
+1. Define the role set from OT touchpoints. Requirement: topics match what each role can actually break or protect. Anchor: IEC 62443-2-1 4.3.2.4.3. Decision: roles are operators, control engineers, EWS users, contractors, and executives. Trade-off accepted: finer role granularity improves relevance and multiplies the content maintenance burden. A role with a distinct OT touchpoint gets its own topic set. Use `references/questionnaire.md` to fix the role set, headcount, and authority for each role before writing topics.
 2. Topic decision per role. Requirement: every topic is one the role can act on. Anchor: AT-3. Decision: operators get phishing, USB discipline, alarm response, and reporting paths. Control engineers get change discipline, logic backup, and remote access hygiene. EWS users get patching and software installation rules. Contractors get site access rules, USB policy, and incident reporting. Executives get their authority limits and the cost of over-broad response actions. Trade-off accepted: role-specific topics cost more to build than a single general course. A general course teaches operators nothing about controller change discipline.
 3. Delivery decision. Requirement: delivery fits production schedules. Anchor: AT-3. Decision: operators get shift-aligned short modules at shift handover. Engineers get hands-on sessions tied to the change workflow. Contractors get gate-side onboarding. Trade-off accepted: distributed delivery is harder to track than a training day. Training days pull operators off production, which operations will not approve.
 4. Frequency decision. Requirement: frequency matches exposure decay. Anchor: AT-2. Decision: annual baseline for all roles, plus event-driven refreshers after incidents or near misses, plus onboarding for new roles and contractors. Trade-off accepted: event-driven training competes with incident cleanup. The incident cleanup is exactly when the lesson is fresh, and the plan states the refresher happens within two weeks.
@@ -63,3 +63,5 @@ This skill is passive. It produces assessment and governance documents only.
 | NIST SP 800-82r3 | PS family | Personnel Security. Contractor onboarding coverage. |
 | NIST CSF 2.0 | PR.AT | Awareness and Training. Family level. Site assigns specific subcategories. |
 
+
+Row-by-row justification lives in `references/standards.md`.

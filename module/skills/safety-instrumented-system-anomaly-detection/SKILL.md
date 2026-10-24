@@ -80,3 +80,5 @@ This skill is passive by default. Active steps are gated in the Workflow section
 | NIST SP 800-82r3 | SI-4 | System Monitoring. The deployed ruleset is the SI-4 sensor for the SIS segment. |
 | NIST CSF 2.0 | DE | Detect. Family level. Site assigns specific subcategories. |
 
+
+Row-by-row justification lives in `references/standards.md`.

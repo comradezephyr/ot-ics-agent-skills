@@ -46,7 +46,7 @@ This skill is passive by default. Active steps are gated in the Workflow section
    `suricata -T -c /etc/suricata/suricata.yaml`
    Exit code 0 and no rule-load errors are required before deployment.
 4. Validate the Zeek policy offline against the baseline capture:
-   `zeek -C -r baseline.pcapng scripts/modbus-anomaly`
+   `zeek -C -r baseline.pcapng site/modbus-anomaly.zeek`
    No script errors and a populated `modbus.log` are required.
 5. Deploy the ruleset to the IDS:
    > STOP: Confirm change control approval before executing this step. If approval is missing, halt and report.
@@ -56,7 +56,7 @@ This skill is passive by default. Active steps are gated in the Workflow section
    Each rule must produce its alert in `test-output/eve.json` with the expected `signature_id`. Replay captures, not live traffic.
 7. Generate live test traffic only if replay cannot exercise a rule:
    > STOP: Confirm change control approval before executing this step. If approval is missing, halt and report.
-   `python3 -c "from pymodbus.client.sync import ModbusTcpClient; c=ModbusTcpClient('<plc-ip>', timeout=5); c.connect(); c.write_register(<addr>, 0)"` from an approved test host, to one PLC, inside the maintenance window.
+   `python3 -c "from pymodbus.client import ModbusTcpClient; c=ModbusTcpClient('<plc-ip>', timeout=5); c.connect(); c.write_register(address=<addr>, value=0, device_id=<unit>); c.close()"` from an approved test host, to one PLC, inside the maintenance window.
 8. Triage production alerts:
    `python3 scripts/modbus_triage.py /var/log/suricata/eve.json --out modbus-triage.md`
 9. Tune. Any rule that fires on the 72 hour baseline is a false positive. Fix the rule or the site variable, then repeat steps 3 and 8. Do not disable rules silently.
@@ -81,3 +81,5 @@ This skill is passive by default. Active steps are gated in the Workflow section
 | NIST SP 800-82r3 | SI-4 | System Monitoring. The deployed ruleset is the SI-4 sensor for Modbus. |
 | NIST CSF 2.0 | DE | Detect. Family level. Site assigns specific subcategories. |
 
+
+Row-by-row justification lives in `references/standards.md`.

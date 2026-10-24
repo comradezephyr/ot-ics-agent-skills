@@ -71,3 +71,5 @@ This skill is passive by default. Active steps are gated in the Workflow section
 | NIST SP 800-82r3 | SC | System and Communications Protection. Family level. Block SC. |
 | NIST SP 800-82r3 | SI | System and Information Integrity. Family level. Block SI. |
 | NIST CSF 2.0 | GV | Govern. Family level. Matrix ownership and review cadence. |
+
+Row-by-row justification lives in `references/standards.md`.

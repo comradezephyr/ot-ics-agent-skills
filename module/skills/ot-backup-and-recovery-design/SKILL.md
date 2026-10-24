@@ -68,3 +68,5 @@ This skill is passive. It produces design documents only.
 | NIST CSF 2.0 | RC | Recover. Family level. Site assigns specific subcategories. |
 | ATT&CK for ICS | T0889 | Modify Program. PLC logic backups are the recovery from a T0889 event. |
 
+
+Row-by-row justification lives in `references/standards.md`.

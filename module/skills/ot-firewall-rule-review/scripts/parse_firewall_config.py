@@ -20,13 +20,18 @@ SEVERITY = {
 
 def load_rules(path):
     with open(path, newline="", encoding="utf-8-sig") as fh:
-        rows = list(csv.DictReader(fh))
+        reader = csv.DictReader(fh)
+        rows = list(reader)
+        fieldnames = reader.fieldnames or []
     if not rows:
         raise SystemExit(f"{path}: no rules parsed")
-    missing = RULE_FIELDS[0] not in rows[0]
+    missing = [field for field in RULE_FIELDS if field not in fieldnames]
     if missing:
-        raise SystemExit(f"{path}: export must contain fields: {', '.join(RULE_FIELDS)}")
-    return rows
+        raise SystemExit(f"{path}: export is missing fields: {', '.join(missing)}")
+    return [
+        {field: (row.get(field) or "").strip() for field in RULE_FIELDS}
+        for row in rows
+    ]
 
 
 def load_purdue_map(path):
@@ -39,38 +44,66 @@ def load_purdue_map(path):
 
 
 def level_of(levels, field):
-    if field.strip().lower() in ("any", ""):
+    value = field.strip()
+    if value.lower() in ("any", ""):
         return None
-    addr = ipaddress.ip_network(field, strict=False) if "/" in field else ipaddress.ip_address(field)
+    try:
+        if "/" in value:
+            addr = ipaddress.ip_network(value, strict=False)
+        else:
+            addr = ipaddress.ip_address(value)
+    except ValueError:
+        return "unknown"
+    is_network = isinstance(addr, (ipaddress.IPv4Network, ipaddress.IPv6Network))
+    if is_network:
+        contained = {
+            level for net, level in levels.items()
+            if net.version == addr.version and net.subnet_of(addr)
+        }
+        if len(contained) == 1:
+            return contained.pop()
+        if len(contained) > 1:
+            return "mixed"
+        return "unknown"
     for net, level in levels.items():
-        if addr.version == net.version and (addr in net if isinstance(addr, ipaddress.IPv4Address) else addr.subnet_of(net)):
+        if addr.version == net.version and addr in net:
             return level
     return "unknown"
 
 
 def check_rule(rule, levels):
     findings = []
-    src = rule["source"].strip().lower()
-    dst = rule["destination"].strip().lower()
+    src = rule["source"].lower()
+    dst = rule["destination"].lower()
 
-    if src in ("any", "0.0.0.0/0") and dst in ("any", "0.0.0.0/0"):
+    if src in ("any", "0.0.0.0/0", "::/0") and dst in ("any", "0.0.0.0/0", "::/0"):
         findings.append(("any-any", "source and destination unconstrained"))
 
     for field in ("source", "destination"):
-        value = rule[field].strip()
+        value = rule[field]
         if value.lower() == "any":
             findings.append(("broad-conduit", f"{field} is any"))
         elif "/" in value:
-            prefix = ipaddress.ip_network(value, strict=False).prefixlen
-            if prefix < 24 and level_of(levels, value) in ("L1", "L2", "L3"):
+            try:
+                rule_net = ipaddress.ip_network(value, strict=False)
+            except ValueError:
+                findings.append(("broad-conduit", f"{field} {value} is not a valid network"))
+                continue
+            ot_levels = {
+                level for net, level in levels.items()
+                if net.version == rule_net.version
+                and net.overlaps(rule_net)
+                and level in ("L1", "L2", "L3")
+            }
+            if ot_levels and rule_net.prefixlen < 24:
                 findings.append(("broad-conduit", f"{field} {value} is broader than /24 inside OT"))
 
-    if not rule["justification"].strip():
+    if not rule["justification"]:
         findings.append(("missing-justification", "no justification recorded"))
-    if not rule["change_ref"].strip():
+    if not rule["change_ref"]:
         findings.append(("missing-justification", "no change reference recorded"))
 
-    last_hit = rule["last_hit"].strip()
+    last_hit = rule["last_hit"]
     if last_hit in ("0", "", "never"):
         findings.append(("stale-rule", f"last hit counter reads {last_hit or 'empty'}"))
 
@@ -90,8 +123,11 @@ def main():
     ap.add_argument("--out", default="firewall-rule-review.md")
     args = ap.parse_args()
 
-    rules = load_rules(args.rules)
-    levels = load_purdue_map(args.purdue_map)
+    try:
+        rules = load_rules(args.rules)
+        levels = load_purdue_map(args.purdue_map)
+    except OSError as exc:
+        raise SystemExit(f"{exc.filename}: {exc.strerror}")
 
     report_rows = []
     for rule in rules:

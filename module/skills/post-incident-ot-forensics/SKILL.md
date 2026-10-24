@@ -82,3 +82,5 @@ This skill is passive by default. Collection reads live systems and exports file
 | ATT&CK for ICS | T0889 | Modify Program. Controller logic evidence is the T0889 record. |
 | ATT&CK for ICS | T0873 | Project File Infection. Project file artifacts are the T0873 evidence. |
 
+
+Row-by-row justification lives in `references/standards.md`.

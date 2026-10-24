@@ -36,7 +36,7 @@ This skill is passive. It produces assessment and governance documents only.
 
 ## Workflow
 
-1. Review the plan structure against the four phases. Requirement: the plan covers the full lifecycle. Anchor: NIST SP 800-61 phases. Decision: Preparation, Detection and Analysis, Containment, Eradication and Recovery, and Post-Incident Activity each have a named section with actionable content. Trade-off accepted: a plan written in phase order reads well and is hard to use at 03:00. The fix is playbooks, not a rewrite. Flag both.
+1. Review the plan structure against the four phases. Requirement: the plan covers the full lifecycle. Anchor: NIST SP 800-61 phases. Decision: Preparation, Detection and Analysis, Containment, Eradication and Recovery, and Post-Incident Activity each have a named section with actionable content. Trade-off accepted: a plan written in phase order reads well and is hard to use at 03:00. The fix is playbooks, not a rewrite. Flag both. Record answers from `references/questionnaire.md` with the plan owner before the review starts, and carry every unanswered question into the findings.
 2. Review the decision authority. Requirement: the plan names who decides. Anchor: IR-1. Decision: for each incident class, the plan names the decision authority for isolation, shutdown, and notification. In OT this is the operations manager, and the plan must say so. Trade-off accepted: naming one authority concentrates decision load during an incident. A plan with a committee as the authority is a plan with no authority.
 3. Review the safety gates. Requirement: the plan states that human safety and process integrity outrank containment. Anchor: 62443-2-1 4.3.4.5. Decision: the plan contains an explicit safety-first statement and every containment action references a safety check. Trade-off accepted: safety-first language slows aggressive containment decisions. In OT that slowness is the design.
 4. Review escalation paths and contacts. Requirement: contacts are current and the paths are unambiguous. Anchor: IR-6. Decision: verify the contact list against reality. Names, phone numbers, and after-hours paths checked for currency with a recorded verification date. Trade-off accepted: contact verification is manual and must be repeated. An unverified contact list is the most common plan failure.
@@ -69,3 +69,5 @@ This skill is passive. It produces assessment and governance documents only.
 | NIST SP 800-82r3 | IR-8 | Incident Response Plan. The plan maintenance process in step 6. |
 | IEC 62443-2-1 | 4.3.4.5 | Incident response capability. Safety gates in step 3. |
 
+
+Row-by-row justification lives in `references/standards.md`.

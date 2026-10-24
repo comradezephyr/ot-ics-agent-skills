@@ -7,7 +7,7 @@ import argparse
 import csv
 import sys
 
-from pymodbus.client.sync import ModbusTcpClient
+from pymodbus.client import ModbusTcpClient
 
 MAX_COUNT = 125
 WINDOWS = [(0, 9999), (10000, 19999), (30000, 39999)]

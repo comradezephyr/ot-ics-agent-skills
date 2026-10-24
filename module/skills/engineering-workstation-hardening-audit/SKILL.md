@@ -34,7 +34,7 @@ metadata:
 
 This skill is active. Collection touches live workstations and is gated in the Workflow section.
 
-- Active. Reads live OS state over WinRM. No configuration changes. Requires change control approval.
+- Active. Reads live OS state over WinRM. No configuration changes, but it opens a remote session to a production workstation, which is what puts it behind change control. Collection at the console needs only the workstation owner present.
 
 ## Workflow
 
@@ -78,3 +78,5 @@ This skill is active. Collection touches live workstations and is gated in the W
 | NIST SP 800-82r3 | CM-7 | Least Functionality. AppLocker and remote agent checks enforce least functionality. |
 | NIST CSF 2.0 | PR | Protect. Family level. Site assigns specific subcategories. |
 
+
+Row-by-row justification lives in `references/standards.md`.

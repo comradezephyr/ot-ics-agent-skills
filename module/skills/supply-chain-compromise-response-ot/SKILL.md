@@ -26,6 +26,8 @@ metadata:
 - Update channel documentation: where vendor updates come from and how they are staged.
 - Vendor emergency contact and the site escalation path.
 - Integrity baselines: firmware hashes and project file hashes per component.
+- python-snap7 2.0 or newer for the S7 identity check. Verify with `python -c "import snap7; print(snap7.__version__)"`.
+- Vendor diagnostic tool for components that do not expose S7 or CIP identity.
 - Firewall access for isolating affected deployments.
 - Credentials: read-only inventory and firewall admin for isolation.
 - Authorization: operations manager approves per-site isolation. The safety engineer reviews any affected safety component.
@@ -45,7 +47,7 @@ This skill is active. Isolation changes live systems and is gated in the Workflo
 2. Identify the compromised component and its version. Record vendor, product, version, and the compromise indicator source: vendor advisory, ICS-CERT, or observed behavior.
 3. Map the deployment footprint from the asset inventory. One row per site and component instance: site, host, version, process served, safety function yes or no.
 4. Verify which sites actually run the affected version. A version check on each instance:
-   `python3 -c "import snap7; c=snap7.client.Client(); c.Connect('<ip>',0,<slot>); print(c.GetCpuInfo().ModuleTypeName, c.GetCpuInfo().Version)"`
+   `python3 -c "import snap7; c=snap7.client.Client(); c.set_connection_type(1); c.connect('<ip>',0,<slot>); i=c.get_cpu_info(); print(i.ModuleTypeName, i.Version); c.disconnect()"`
    Adjust for platform. Record actual version per instance. Inventory data is often stale.
 5. Classify instances: running the affected version, running a patched version, or not affected. Only the first class is in scope for isolation.
 6. Isolate affected deployments:
@@ -86,3 +88,5 @@ This skill is active. Isolation changes live systems and is gated in the Workflo
 | ATT&CK for ICS | T0889 | Modify Program. A compromised component can modify controller programs after deployment. |
 | ATT&CK for ICS | T0862 | Supply Chain Compromise. The compromise itself enters through the vendor supply path. |
 
+
+Row-by-row justification lives in `references/standards.md`.

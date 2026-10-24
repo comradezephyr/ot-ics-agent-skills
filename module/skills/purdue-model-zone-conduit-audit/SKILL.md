@@ -69,3 +69,5 @@ This skill is passive by default. Active steps are gated in the Workflow section
 | ATT&CK for ICS | T0842 | Network Sniffing. Flow baseline reuse shows new conduits from unauthorized behavior. |
 | NIST SP 800-82r3 | SC-7 | Boundary protection. Enforcement device checks map to SC-7. |
 | NIST CSF 2.0 | ID | Identify. Family level. Site assigns specific subcategories. |
+
+Row-by-row justification lives in `references/standards.md`.

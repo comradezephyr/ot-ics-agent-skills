@@ -1,6 +1,6 @@
 # Historian Audit Queries
 
-Working queries per platform. Run read-only. Replace placeholders before executing. Query IDs are referenced from the workflow and from `historian-tamper-detection.md`.
+Working queries per platform. Run read-only. `:name` marks a placeholder; substitute the platform form (`@name` in T-SQL, `:name` in psql, a bound parameter in the PI client). The workflow cites these IDs by step and the report cites them per finding.
 
 ## OSIsoft PI
 

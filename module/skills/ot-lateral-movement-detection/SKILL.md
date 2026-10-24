@@ -40,7 +40,7 @@ This skill is passive by default. Active steps are gated in the Workflow section
 
 1. Load `purdue-map.csv` and classify the boundary sensors. Every rule below keys on the `$L1_NETS`, `$L2_NETS`, `$L3_NETS`, `$L35_NETS`, `$L4_NETS` variables.
 2. Author the ruleset from `references/detection-rules.md`. The rules cover RDP, SMB, SSH, and WinRM crossings by adjacency class.
-3. Validate offline: `suricata -T -c /etc/suricata/suricata.yaml` and `zeek -C -r baseline.pcapng scripts/lateral-movement`.
+3. Validate offline: `suricata -T -c /etc/suricata/suricata.yaml` and `zeek -C -r baseline.pcapng site/lateral-movement.zeek`, with the optional policy from `references/detection-rules.md` saved under `site/`.
 4. Deploy the ruleset to the boundary sensors:
    > STOP: Confirm change control approval before executing this step. If approval is missing, halt and report.
    Copy the rules to each sensor and reload with `suricatasc -c reload-rules`.
@@ -76,3 +76,5 @@ This skill is passive by default. Active steps are gated in the Workflow section
 | NIST SP 800-82r3 | SC-7 | Boundary Protection. The crossing monitor verifies SC-7 enforcement at runtime. |
 | NIST CSF 2.0 | DE | Detect. Family level. Site assigns specific subcategories. |
 
+
+Row-by-row justification lives in `references/standards.md`.

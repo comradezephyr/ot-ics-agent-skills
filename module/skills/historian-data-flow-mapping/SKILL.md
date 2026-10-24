@@ -70,3 +70,5 @@ This skill is passive by default. Active steps are gated in the Workflow section
 | ATT&CK for ICS | T0811 | Data from Information Repositories. The flow map shows where historian data lives and who reaches it. |
 | ATT&CK for ICS | T0882 | Theft of Operational Information. Unexpected consumers of historian streams are flag candidates. |
 | NIST CSF 2.0 | ID | Identify. Family level. Site assigns specific subcategories. |
+
+Row-by-row justification lives in `references/standards.md`.

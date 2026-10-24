@@ -1,4 +1,4 @@
-﻿# OT/ICS Agent Skills
+# OT/ICS Agent Skills
 
 ## What This Is
 
@@ -14,7 +14,7 @@ Each skill in `module/skills/` is a directory containing a runbook. Every runboo
 - Verification. Checks that confirm each step produced a correct result.
 - Framework Mappings. The framework sections this skill touches.
 
-The agent reads the runbook before starting and executes the workflow in order. If prerequisites are unmet, it stops and reports. If verification fails, it reports what did not pass instead of continuing. Skills reference each other by directory name, so install the whole `module/` tree, not individual skills.
+The agent reads the runbook before starting and executes the workflow in order. If prerequisites are unmet, it stops and reports. If verification fails, it reports what did not pass instead of continuing. Skills reference each other by directory name, so install the whole `module/` tree, not individual skills. Every runbook ends with a pointer to `references/standards.md`, which expands each framework row and names the step it anchors. Read it when a mapping drives a decision.
 
 ## Framework Mappings
 

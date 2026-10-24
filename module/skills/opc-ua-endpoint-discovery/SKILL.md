@@ -23,7 +23,7 @@ metadata:
 ## Prerequisites
 
 - tshark 4.x. Verify with `tshark --version`.
-- nmap 7.94 or newer with the `opcua-discovery` NSE script.
+- asyncua 2.x. Verify with `python -c "import asyncua; print(asyncua.__version__)"`. The bundled `scripts/opcua_endpoint_probe.py` uses it.
 - SPAN port or network TAP on the segment.
 - Credentials: anonymous or a read-only service account where the server enforces authentication.
 - Authorization: server owner sign-off for endpoint probes.
@@ -45,14 +45,15 @@ This skill is passive by default. Active steps are gated in the Workflow section
 3. Record the security policies observed in OpenSecureChannel frames. Parse the resolved policy field per source address and list the distinct values. A server seen only with the policy None is a hardening finding, not a configuration fact.
 4. Probe a server that never opens a SecureChannel during the window:
    > STOP: Confirm change control approval before executing this step. If approval is missing, halt and report.
-   `sudo nmap -sV -Pn -p 4840 --script opcua-discovery <ip>`
-5. Decision point: if the server answers on 4840 but the script lists no endpoints, the server requires a valid application URI in the Hello message. Record as `app-uri-gated`.
+   `python3 scripts/opcua_endpoint_probe.py --url opc.tcp://<ip>:4840 --out endpoints.md`
+   The probe connects with the None policy, reads the endpoint list, and writes the policy, mode, and token table. Exit 3 means the server answered but returned no endpoints. Apply step 5 before recording the result.
+5. Decision point: if the server answers on 4840 but returns no endpoints, the server requires a registered application URI. Rerun with `--application-uri <registered-uri>`. If it still returns nothing, record as `app-uri-gated`.
 6. Write `endpoints.md`: server IP, discovered endpoint URLs, security policies, user token types, and clients observed in capture.
 
 ## Verification
 
 - Correct output: every 4840 server has endpoints and a policy set, or an `app-uri-gated` flag. `opcua_flows.csv` lists all detected OPC UA flows.
-- Failure mode: nmap lists no endpoints on an open 4840. The server rejects Hello without an application URI. Use the client tool with a matching application URI.
+- Failure mode: the probe exits 3 on an open 4840. The server rejects the session without a registered application URI. Rerun with `--application-uri`, then record `app-uri-gated` if it still returns nothing.
 - Failure mode: the capture shows repeated BadSecurityPolicyRejected during normal operations. The client and server policy sets do not intersect.
 - OT check: confirm the historian kept its OPC UA subscription running through the probe window. Post-query capture still shows periodic Publish frames from the historian client.
 - OT check: confirm no server certificate changed during the window. A changed certificate indicates replacement or tampering.
@@ -67,3 +68,5 @@ This skill is passive by default. Active steps are gated in the Workflow section
 | NIST SP 800-82r3 | IA-5 | Authenticator management. The policy and token inventory supports authenticator management for servers. |
 | ATT&CK for ICS | T0888 | Remote System Information Discovery. Endpoint enumeration is the same discovery an adversary runs. |
 | NIST CSF 2.0 | ID | Identify. Family level. Site assigns specific subcategories. |
+
+Row-by-row justification lives in `references/standards.md`.

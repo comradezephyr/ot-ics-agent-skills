@@ -56,20 +56,22 @@ This skill is passive by default. Active steps are gated in the Workflow section
 
 | Framework | Control or Technique ID | Relevance |
 | --- | --- | --- |
-| IEC 62443-3-3 | SR 1.1 | Identification and authentication of human users. Block A1. |
-| IEC 62443-3-3 | SR 1.2 | Software process and device identification. Block A2. |
-| IEC 62443-3-3 | SR 2.1 | Authorization enforcement. Block B1. |
-| IEC 62443-3-3 | SR 2.8 | Auditable events. Block B2. |
-| IEC 62443-3-3 | SR 3.1 | Communication integrity. Block C1. |
-| IEC 62443-3-3 | SR 3.3 | Security functionality verification. Block C2. |
-| IEC 62443-3-3 | SR 4.1 | Information confidentiality. Block D1. |
-| IEC 62443-3-3 | SR 4.3 | Use of cryptography. Block D2. |
-| IEC 62443-3-3 | SR 5.1 | Network segmentation. Block E1. |
-| IEC 62443-3-3 | SR 5.2 | Zoning. Block E2. |
-| IEC 62443-3-3 | SR 5.4 | General purpose person-to-person communication restriction. Block E3. |
+| IEC 62443-3-3 | SR 1.1 | Identification and authentication of human users. Block A1 tests account provenance on every zone asset. |
+| IEC 62443-3-3 | SR 1.2 | Software process and device identification. Block A2 records firmware and model evidence per asset. |
+| IEC 62443-3-3 | SR 2.1 | Authorization enforcement. Block B1 tests role separation across operators and engineers. |
+| IEC 62443-3-3 | SR 2.8 | Auditable events. Block B2 checks that each zone asset exports its audit record. |
+| IEC 62443-3-3 | SR 3.1 | Communication integrity. Block C1 verifies integrity protection on conduits that carry control traffic. |
+| IEC 62443-3-3 | SR 3.3 | Security functionality verification. Block C2 tests patching and configuration drift on the same assets. |
+| IEC 62443-3-3 | SR 4.1 | Information confidentiality. Block D1 covers setpoint and recipe data at rest and in transit. |
+| IEC 62443-3-3 | SR 4.3 | Use of cryptography. Block D2 records where cryptography is required and where it is absent. |
+| IEC 62443-3-3 | SR 5.1 | Network segmentation. Block E1 confirms each zone boundary matches the documented conduit list. |
+| IEC 62443-3-3 | SR 5.2 | Zoning. Block E2 tests that zone membership is enforced by the boundary device. |
+| IEC 62443-3-3 | SR 5.4 | General purpose person-to-person communication restriction. Block E3 checks for chat and email paths into L1. |
 | IEC 62443-3-3 | SR 6.1 | Audit log accessibility. Block F1. |
-| IEC 62443-3-3 | SR 6.2 | Continuous monitoring. Block F2. |
+| IEC 62443-3-3 | SR 6.2 | Continuous monitoring. Block F2 checks that monitoring coverage exists for every zone asset. |
 | IEC 62443-3-3 | SR 7.1 | Resilience against denial of service. Block G1. |
 | IEC 62443-3-3 | SR 7.2 | Control system backup and recovery. Block G2. |
 | IEC 62443-3-3 | SR 7.6 | Network and service availability. Block G3. |
 | NIST CSF 2.0 | GV | Govern. Family level. Register owners are assigned in this workflow. |
+
+Row-by-row justification lives in `references/standards.md`.

@@ -81,3 +81,5 @@ This skill is passive by default. Triage collects telemetry and makes decisions.
 | ATT&CK for ICS | T0880 | Loss of Safety. Safety-classified incidents route to the safety engineer first. |
 | ATT&CK for ICS | T0889 | Modify Program. Unexplained controller state changes route to logic integrity checks. |
 
+
+Row-by-row justification lives in `references/standards.md`.

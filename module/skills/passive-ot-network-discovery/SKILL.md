@@ -67,8 +67,8 @@ This skill is passive by default. Active steps are gated in the Workflow section
    Correct output: `conn.log` plus `modbus.log`, `dnp3.log`, and `enip.log` when those analyzers fire. `-C` ignores link-layer checksum errors, which are common on span taps.
 8. Optional identity confirmation. Use only for devices passive data could not type:
    > STOP: Confirm change control approval before executing this step. If approval is missing, halt and report.
-   `sudo nmap -sV -Pn -p 502,20000,4840,44818 --script modbus-discover,opcua-discovery,enip-info <ip>`
-   Run for one or two devices at most. Requires a maintenance window.
+   `sudo nmap -sV -Pn -p 502,44818 --script modbus-discover,enip-info <ip>`
+   Run for one or two devices at most. Requires a maintenance window. nmap has no OPC UA discovery script, so servers on 4840 go to `opc-ua-endpoint-discovery` instead.
 9. Write `inventory.md`. One row per asset. Columns: MAC, IP, protocols, role, Purdue level. Role inference rules:
    - PLC: Modbus, DNP3, or S7 port 102 server. Purdue L1.
    - HMI or EWS: initiates many 502, 20000, or 102 sessions toward multiple servers. Purdue L2.
@@ -95,3 +95,5 @@ This skill is passive by default. Active steps are gated in the Workflow section
 | NIST SP 800-82r3 | SC-7 | Boundary protection. Flow data drives boundary rule definition. |
 | ATT&CK for ICS | T0842 | Network Sniffing. The captured telemetry is the same data used to detect unauthorized sniffing. |
 | NIST CSF 2.0 | ID | Identify. Family level. CSF subcategories are site specific and not pinned by this skill. |
+
+Row-by-row justification lives in `references/standards.md`.

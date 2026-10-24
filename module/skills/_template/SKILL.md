@@ -4,6 +4,8 @@ description: One or two sentences. State WHAT this skill does and WHEN to use it
 version: 0.1.0
 license: Apache-2.0
 metadata:
+  # skill_id is otics-<CATEGORY>-<name>. CATEGORY is DIS, ASM, MON, IRR, ARC, or GOV.
+  skill_id: otics-DIS-skill-name-in-kebab-case
   author: your-github-username
   frameworks:
     - IEC 62443-3-3
@@ -21,7 +23,7 @@ metadata:
 
 ## Prerequisites
 
-- pymodbus 3.x. Verify with `pip show pymodbus`.
+- pymodbus 3.10 or newer. Verify with `python -c "import pymodbus; print(pymodbus.__version__)"`.
 - nmap 7.94 or newer with NSE OT scripts. Verify with `nmap --version`.
 - SPAN port or network TAP on the target segment. If unavailable, use <passive-skill-name> instead.
 - Credentials: <list accounts and scopes, and where the agent retrieves them>.
@@ -45,7 +47,8 @@ Delete the line that does not apply.
    If no port responds, stop and report the SPAN path as suspect.
 3. Parse `results/nmap_502.txt` into `devices.csv`. Columns: `ip`, `port`, `unit`, `response_code`.
 4. Query device identity:
-   `mbpoll -1 -r 0 -c 1 <ip> --timeout 5`
+   `mbpoll -1 -0 -a <unit_id> -t 4 -r 0 -c 1 -o 5 <ip>`
+   `-1` polls once, `-0` uses PDU addressing, and `-o 5` sets a 5 second timeout.
    If the reply is unit 0xFF or the query times out, mark the row `unresponsive` and continue. Do not retry more than twice.
 5. <Describe the active step here. This step sends packets to live devices.>
    > STOP: Confirm change control approval before executing this step. If approval is missing, halt and report.
@@ -69,3 +72,5 @@ Delete the line that does not apply.
 | ATT&CK for ICS | T0843 | Program Download. Matches the write detection in step 6. |
 | NIST SP 800-82r3 | AC-2 | Account Management. Supports the access review in step 5. |
 | <Framework> | <ID> | <State which step this maps and why. Use real IDs only.> |
+
+Row-by-row justification lives in `references/standards.md`.

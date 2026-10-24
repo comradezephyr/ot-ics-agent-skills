@@ -22,13 +22,13 @@ metadata:
 
 ## Prerequisites
 
-- python-snap7 1.3 or newer. Verify with `python -c "import snap7; print(snap7.__version__)"`.
+- python-snap7 2.0 or newer. Verify with `python -c "import snap7; print(snap7.__version__)"`.
 - Network route to the controller and the correct rack and slot numbers.
 - Known-good baseline from a previous approved capture.
 - Connection type: S7-300/400 use 1. S7-1200/1500 use 3 via `client.set_connection_type(3)`.
 - Vendor tools where applicable: TIA Portal online compare, Studio 5000 Compare Tool. Optional cross-check.
 - plcscan for legacy S7 devices. Optional. Check `python3 plcscan.py --help` for the installed flag set.
-- pymodbus 3.x for register-level checks on Modbus controllers.
+- pymodbus 3.10 or newer for register-level checks on Modbus controllers.
 - Credentials: engineering access where the controller enforces it.
 - Authorization: change control approval. Every step that touches the controller is active.
 - Upstream skills: `passive-ot-network-discovery` for the reachable controller list.
@@ -46,7 +46,7 @@ This skill is active. Every step that touches the controller is gated in the Wor
    If verification fails, rebuild the baseline inside the same maintenance window. Never compare against a corrupt baseline.
 2. Confirm the CPU identity online:
    > STOP: Confirm change control approval before executing this step. If approval is missing, halt and report.
-   `python3 -c "import snap7; c=snap7.client.Client(); c.Connect('<ip>',0,<slot>); print(c.GetCpuInfo().ModuleTypeName)"`
+   `python3 -c "import snap7; c=snap7.client.Client(); c.set_connection_type(1); c.connect('<ip>',0,<slot>); print(c.get_cpu_info().ModuleTypeName); c.disconnect()"`
    Record the module type and CPU state. Proceed only when the CPU is in RUN (8).
 3. Capture a fresh baseline when none exists or when the change is intentional:
    > STOP: Confirm change control approval before executing this step. If approval is missing, halt and report.
@@ -59,7 +59,7 @@ This skill is active. Every step that touches the controller is gated in the Wor
 6. Vendor online compare where the site requires it. TIA Portal: Online and Diagnostics, then Compare. Studio 5000: Logic, Compare Tool. Document the vendor result as a cross-check on the hash method.
 7. Register-level check for Modbus controllers that do not expose S7 blocks:
    > STOP: Confirm change control approval before executing this step. If approval is missing, halt and report.
-   `python3 -c "from pymodbus.client.sync import ModbusTcpClient; c=ModbusTcpClient('<ip>', timeout=5); c.connect(); print(c.read_holding_registers(40000, 10, device_id=1).registers)"`
+   `python3 -c "from pymodbus.client import ModbusTcpClient; c=ModbusTcpClient('<ip>', timeout=5); c.connect(); print(c.read_holding_registers(address=40000, count=10, device_id=1).registers); c.close()"`
    Compare the returned setpoints against `baseline/registers-40000.csv`. Values outside tolerance are findings.
 8. Write `logic-integrity-report.md`. Per block: name, type, size, sha256, status (MATCH, MISMATCH, or NEW), CPU identity, start and end CPU state, overall PASS or FAIL, and the change record cross-reference.
 
@@ -81,3 +81,5 @@ This skill is active. Every step that touches the controller is gated in the Wor
 | ATT&CK for ICS | T0843 | Program Download. The compare detects the state a download leaves behind. |
 | NIST SP 800-82r3 | SI-7 | Software, firmware, and information integrity. Hash comparison is the SI-7 control action for PLC programs. |
 | NIST CSF 2.0 | PR | Protect. Family level. Site assigns specific subcategories. |
+
+Row-by-row justification lives in `references/standards.md`.

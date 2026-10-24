@@ -69,3 +69,5 @@ This skill is passive. It produces design documents only.
 | NIST CSF 2.0 | GV | Govern. Family level. Gate authority is a governance decision. |
 | ATT&CK for ICS | T0889 | Modify Program. The hash verification step detects unauthorized program changes riding the change process. |
 
+
+Row-by-row justification lives in `references/standards.md`.
