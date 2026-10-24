@@ -95,3 +95,5 @@ This skill is passive by default. Active steps are gated in the Workflow section
 | NIST SP 800-82r3 | SC-7 | Boundary protection. Flow data drives boundary rule definition. |
 | ATT&CK for ICS | T0842 | Network Sniffing. The captured telemetry is the same data used to detect unauthorized sniffing. |
 | NIST CSF 2.0 | ID | Identify. Family level. CSF subcategories are site specific and not pinned by this skill. |
+
+Row-by-row justification lives in `references/standards.md`.

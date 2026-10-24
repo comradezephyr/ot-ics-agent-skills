@@ -68,3 +68,5 @@ This skill is passive by default. Active steps are gated in the Workflow section
 | NIST SP 800-82r3 | SC-7 | Boundary protection. DCP broadcast scope marks the practical zone boundary. |
 | ATT&CK for ICS | T0846 | Remote System Discovery. DCP enumeration is the same Layer 2 discovery an adversary runs. |
 | NIST CSF 2.0 | ID | Identify. Family level. Site assigns specific subcategories. |
+
+Row-by-row justification lives in `references/standards.md`.

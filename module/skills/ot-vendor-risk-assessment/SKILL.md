@@ -68,3 +68,5 @@ This skill is passive. It produces assessment and governance documents only.
 | NIST SP 800-82r3 | SA-12 | Supply Chain Protection. SBOM availability and patch cadence. |
 | NIST SP 800-82r3 | RA-3 | Risk Assessment. Likelihood from advisory posture, impact from zone exposure. |
 | ATT&CK for ICS | T0862 | Supply Chain Compromise. The threat this assessment reduces. |
+
+Row-by-row justification lives in `references/standards.md`.

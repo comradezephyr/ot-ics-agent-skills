@@ -63,3 +63,5 @@ This skill is passive. It produces assessment and governance documents only.
 | NIST SP 800-82r3 | CA-7 | Continuous Monitoring. The quarterly access review cadence. |
 | NIST CSF 2.0 | GV.RR | Roles, Responsibilities, and Authorities. The ownership matrix is the GV.RR artifact. |
 
+
+Row-by-row justification lives in `references/standards.md`.

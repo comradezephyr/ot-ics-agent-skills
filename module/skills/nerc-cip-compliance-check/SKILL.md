@@ -70,3 +70,5 @@ This skill is passive. It produces assessment and governance documents only.
 | NIST SP 800-82r3 | CM-3 | Configuration Change Control. Maps to CIP-010-3 R1. |
 | NIST SP 800-82r3 | RA-3 | Risk Assessment. Maps to the categorization basis in step 2. |
 | NIST SP 800-82r3 | SA-9 | External Information System Services. Maps to CIP-013 vendor obligations. |
+
+Row-by-row justification lives in `references/standards.md`.

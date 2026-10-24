@@ -76,3 +76,5 @@ This skill is passive by default. Active steps are gated in the Workflow section
 | NIST SP 800-82r3 | SC-7 | Boundary Protection. The crossing monitor verifies SC-7 enforcement at runtime. |
 | NIST CSF 2.0 | DE | Detect. Family level. Site assigns specific subcategories. |
 
+
+Row-by-row justification lives in `references/standards.md`.

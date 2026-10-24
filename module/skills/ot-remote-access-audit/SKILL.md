@@ -37,7 +37,7 @@ This skill is passive by default. Active steps are gated in the Workflow section
 
 ## Workflow
 
-1. Load the config exports and logs.
+1. Load the config exports and logs. Complete `references/questionnaire.md` first, one block per remote path, so the export review has a known scope. An answer without evidence goes into the findings list.
 2. Enumerate every remote path into OT: site-to-site VPN, remote-access VPN, vendor tunnel, modem, cellular router.
 3. For each path record: endpoints, protocol, owner, MFA status, session logging status, session duration limit.
 4. Decision point: a path with no MFA is a High finding. Move it to the top of the findings list.
@@ -66,3 +66,5 @@ This skill is passive by default. Active steps are gated in the Workflow section
 | ATT&CK for ICS | T0884 | Connection Proxy. Vendor tunnels and jump hosts are proxy points. |
 | NIST SP 800-82r3 | AC-2 | Account Management. The authorized user cross-check in step 6. |
 | NIST CSF 2.0 | PR | Protect. Family level. Site assigns specific subcategories. |
+
+Row-by-row justification lives in `references/standards.md`.

@@ -67,3 +67,5 @@ This skill is passive by default. Active steps are gated in the Workflow section
 | NIST SP 800-82r3 | IA-5 | Authenticator management. The policy and token inventory supports authenticator management for servers. |
 | ATT&CK for ICS | T0888 | Remote System Information Discovery. Endpoint enumeration is the same discovery an adversary runs. |
 | NIST CSF 2.0 | ID | Identify. Family level. Site assigns specific subcategories. |
+
+Row-by-row justification lives in `references/standards.md`.

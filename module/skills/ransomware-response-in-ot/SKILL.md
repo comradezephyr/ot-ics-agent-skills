@@ -91,3 +91,5 @@ This skill is active. Isolation changes a live system and is gated in the Workfl
 | ATT&CK for ICS | T0886 | Remote Services. Ransomware staging through remote access paths. |
 | ATT&CK for ICS | T0889 | Modify Program. Ransomware on engineering stations can corrupt project files. |
 
+
+Row-by-row justification lives in `references/standards.md`.

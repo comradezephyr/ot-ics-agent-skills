@@ -86,3 +86,5 @@ This skill is active. Isolation changes live systems and is gated in the Workflo
 | ATT&CK for ICS | T0889 | Modify Program. A compromised component can modify controller programs after deployment. |
 | ATT&CK for ICS | T0862 | Supply Chain Compromise. The compromise itself enters through the vendor supply path. |
 
+
+Row-by-row justification lives in `references/standards.md`.

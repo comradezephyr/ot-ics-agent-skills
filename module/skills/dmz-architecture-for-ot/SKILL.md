@@ -70,3 +70,5 @@ This skill is passive. It produces design documents only.
 | NIST CSF 2.0 | PR | Protect. Family level. Site assigns specific subcategories. |
 | ATT&CK for ICS | T0886 | Remote Services. Brokered termination removes direct remote paths. |
 
+
+Row-by-row justification lives in `references/standards.md`.

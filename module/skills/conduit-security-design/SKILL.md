@@ -69,3 +69,5 @@ This skill is passive. It produces design documents only.
 | NIST CSF 2.0 | PR | Protect. Family level. Site assigns specific subcategories. |
 | ATT&CK for ICS | T0855 | Unauthorized Command Message. Function-code filtering at the boundary blocks unauthorized commands. |
 
+
+Row-by-row justification lives in `references/standards.md`.

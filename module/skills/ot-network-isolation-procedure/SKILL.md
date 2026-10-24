@@ -80,3 +80,5 @@ This skill is active. Isolation changes live network enforcement and is gated in
 | ATT&CK for ICS | T0881 | Service Stop. The rollback rules and process check prevent a self-inflicted service stop. |
 | ATT&CK for ICS | T0885 | Commonly Used Port. Isolation rules keyed on the OT protocol ports rather than blanket denies. |
 
+
+Row-by-row justification lives in `references/standards.md`.

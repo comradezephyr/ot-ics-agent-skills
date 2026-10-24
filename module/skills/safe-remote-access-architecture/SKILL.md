@@ -75,3 +75,5 @@ This skill is passive. It produces design documents only.
 | ATT&CK for ICS | T0886 | Remote Services. The threat the design removes preconditions for. |
 | ATT&CK for ICS | T0884 | Connection Proxy. Per-vendor tunnels bound the shared portal blast radius. |
 
+
+Row-by-row justification lives in `references/standards.md`.

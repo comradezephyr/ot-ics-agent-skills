@@ -49,7 +49,7 @@ This skill is passive by default. Active steps are gated in the Workflow section
    Convert to inter-arrival deltas with the bundled analysis or a short python script. Record the mean and standard deviation per pair.
 4. Deploy the Zeek policy from `references/detection-rules.md` into the Zeek site scripts directory:
    > STOP: Confirm change control approval before executing this step. If approval is missing, halt and report.
-   Copy `profinet-detection-rules.zeek` to `site/` and reload Zeek with `zeekctl deploy`.
+   Copy `references/profinet-detection-rules.zeek` to `site/` and reload Zeek with `zeekctl deploy`.
 5. Prove the policy fires using offline replay only:
    `zeek -C -r pn-anomaly-test.pcapng site/profinet-detection-rules.zeek`
    Build the test capture on a bench segment: a DCP SET NAME with a duplicate name, an ARP reply pair with conflicting MACs, and a truncated RT stream.
@@ -77,3 +77,5 @@ This skill is passive by default. Active steps are gated in the Workflow section
 | NIST SP 800-82r3 | SI-4 | System Monitoring. The deployed policy is the SI-4 sensor for Layer 2. |
 | NIST CSF 2.0 | DE | Detect. Family level. Site assigns specific subcategories. |
 
+
+Row-by-row justification lives in `references/standards.md`.

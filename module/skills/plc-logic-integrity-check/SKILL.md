@@ -81,3 +81,5 @@ This skill is active. Every step that touches the controller is gated in the Wor
 | ATT&CK for ICS | T0843 | Program Download. The compare detects the state a download leaves behind. |
 | NIST SP 800-82r3 | SI-7 | Software, firmware, and information integrity. Hash comparison is the SI-7 control action for PLC programs. |
 | NIST CSF 2.0 | PR | Protect. Family level. Site assigns specific subcategories. |
+
+Row-by-row justification lives in `references/standards.md`.

@@ -80,7 +80,9 @@ This skill is passive by default. Active steps are gated in the Workflow section
 | ATT&CK for ICS | T0855 | Unauthorized Command Message. DIRECT_OPERATE and WRITE from non-masters. |
 | ATT&CK for ICS | T0848 | Rogue Master. Impersonation detection, one outstation address from two sources. |
 | ATT&CK for ICS | T0856 | Spoof Reporting Message. Unsolicited response injection outside the polling window. |
-| ATT&CK for ICS | T0881 | Service Stop. COLD_RESTART detection. |
+| ATT&CK for ICS | T0881 | Service Stop. COLD_RESTART and WARM_RESTART requests are replayed in step 6 and never sent to a live outstation per step 7. |
 | NIST SP 800-82r3 | SI-4 | System Monitoring. The deployed ruleset is the SI-4 sensor for DNP3. |
 | NIST CSF 2.0 | DE | Detect. Family level. Site assigns specific subcategories. |
 
+
+Row-by-row justification lives in `references/standards.md`.

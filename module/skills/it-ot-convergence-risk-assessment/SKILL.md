@@ -75,3 +75,5 @@ This skill is passive. It produces design documents only.
 | NIST CSF 2.0 | ID | Identify. Family level. Site assigns specific subcategories. |
 | ATT&CK for ICS | T0884 | Connection Proxy. SaaS vendors and monitoring platforms become proxy paths into OT. |
 
+
+Row-by-row justification lives in `references/standards.md`.

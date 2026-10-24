@@ -69,3 +69,5 @@ This skill is passive. It produces assessment and governance documents only.
 | NIST SP 800-82r3 | CM-8 | System Component Inventory. Evidence for the asset domain. |
 | NIST SP 800-82r3 | SI-4 | System Monitoring. Evidence for the situational awareness domain. |
 | NIST SP 800-82r3 | PM family | Program management evidence for the program domain. |
+
+Row-by-row justification lives in `references/standards.md`.

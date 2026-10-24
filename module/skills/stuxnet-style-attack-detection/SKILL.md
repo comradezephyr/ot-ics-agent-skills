@@ -90,3 +90,5 @@ This skill is a detection strategy, not a single rule. It maps each Stuxnet-styl
 | NIST SP 800-82r3 | SI-4 | System Monitoring. The strategy is the SI-4 monitoring plan for control logic. |
 | NIST CSF 2.0 | DE | Detect. Family level. Site assigns specific subcategories. |
 
+
+Row-by-row justification lives in `references/standards.md`.

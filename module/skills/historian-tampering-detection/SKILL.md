@@ -69,3 +69,5 @@ This skill is passive. Queries run read-only against the audit trail and archive
 | NIST SP 800-82r3 | AU-6 | Audit Record Review. The query set is the AU-6 review procedure for the historian. |
 | NIST CSF 2.0 | DE | Detect. Family level. Site assigns specific subcategories. |
 
+
+Row-by-row justification lives in `references/standards.md`.

@@ -75,3 +75,5 @@ This skill is passive by default. Active steps are gated in the Workflow section
 | ATT&CK for ICS | T0855 | Unauthorized Command Message. Write function code detection in step 2 flags candidate T0855 traffic. |
 | NIST SP 800-82r3 | RA-5 | Vulnerability scanning. Read-only enumeration feeds the assessment input. |
 | NIST CSF 2.0 | ID | Identify. Family level. Site assigns specific subcategories. |
+
+Row-by-row justification lives in `references/standards.md`.

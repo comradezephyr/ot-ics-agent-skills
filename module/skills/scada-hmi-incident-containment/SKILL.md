@@ -77,3 +77,5 @@ This skill is active. Firewall isolation changes a live system and is gated in t
 | ATT&CK for ICS | T0886 | Remote Services. The deny closes the HMI session path. |
 | ATT&CK for ICS | T0882 | Theft of Operational Information. Log preservation captures what the adversary accessed. |
 
+
+Row-by-row justification lives in `references/standards.md`.

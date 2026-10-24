@@ -87,3 +87,5 @@ This skill is active. Every step that touches the controller is gated in the Wor
 | NIST CSF 2.0 | RC | Recover. Family level. Site assigns specific subcategories. |
 | ATT&CK for ICS | T0889 | Modify Program. The restore removes tampered logic and restores approved logic. |
 
+
+Row-by-row justification lives in `references/standards.md`.

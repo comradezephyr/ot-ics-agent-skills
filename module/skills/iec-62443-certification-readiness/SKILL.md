@@ -66,3 +66,5 @@ This skill is passive. It produces assessment and governance documents only.
 | IEC 62443-2-4 | service provider requirements | Service delivery, personnel, and access processes. Step 2. |
 | IEC 62443-3-2 | zone and conduit design | Prerequisite for the 3-3 scope. Step 2. |
 
+
+Row-by-row justification lives in `references/standards.md`.
