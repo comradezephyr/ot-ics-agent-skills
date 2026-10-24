@@ -10,17 +10,7 @@ import sys
 from pathlib import Path
 
 import snap7
-from snap7 import types
 
-BLOCK_TYPES = {
-    "OB": types.Block_OB,
-    "DB": types.Block_DB,
-    "SDB": types.Block_SDB,
-    "FC": types.Block_FC,
-    "FB": types.Block_FB,
-    "SFB": types.Block_SFB,
-    "SFC": types.Block_SFC,
-}
 NAME_RE = re.compile(r"^(SDB|SFB|SFC|DB|FC|FB|OB)(\d+)$")
 
 
@@ -28,8 +18,7 @@ def parse_block(name):
     m = NAME_RE.match(name)
     if not m:
         sys.exit(f"invalid block name: {name}")
-    block_type = BLOCK_TYPES[m.group(1)]
-    return block_type, int(m.group(2))
+    return int(m.group(2))
 
 
 def sha256(data):
@@ -50,16 +39,19 @@ def main():
 
     client = snap7.client.Client()
     client.set_connection_type(args.connection_type)
-    client.Connect(args.ip, args.rack, args.slot)
+    try:
+        client.connect(args.ip, args.rack, args.slot)
+    except Exception as exc:
+        sys.exit(f"connection to {args.ip} failed: {exc}")
 
     rows = []
     baseline = Path(args.baseline_dir)
     baseline.mkdir(parents=True, exist_ok=True)
 
     for name in args.blocks:
-        block_type, block_num = parse_block(name)
+        block_num = parse_block(name)
         try:
-            blob = client.Upload(block_num, block_type)
+            blob = client.upload(block_num)
         except Exception as exc:
             rows.append((name, 0, "", "ERROR", str(exc)))
             continue
@@ -78,7 +70,7 @@ def main():
         status = "MATCH" if digest == expected else "MISMATCH"
         rows.append((name, len(blob), digest, status, ""))
 
-    client.Disconnect()
+    client.disconnect()
 
     if args.capture:
         print(f"wrote baseline for {len(rows)} blocks to {baseline}")
