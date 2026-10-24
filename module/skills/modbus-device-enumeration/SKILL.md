@@ -23,7 +23,7 @@ metadata:
 ## Prerequisites
 
 - tshark 4.x. Verify with `tshark --version`.
-- pymodbus 3.x. Verify with `pip show pymodbus`.
+- pymodbus 3.10 or newer. Verify with `python -c "import pymodbus; print(pymodbus.__version__)"`.
 - mbpoll 1.5 or newer. Verify with `mbpoll -V`.
 - SPAN port or network TAP on the segment.
 - Endpoint list from `passive-ot-network-discovery`, or an approved device list.
@@ -46,8 +46,9 @@ This skill is passive by default. Active steps are gated in the Workflow section
 3. Merge `modbus_profile.txt` into `register_candidates.csv`. Key by `(ip, unit_id)`.
 4. Read the register windows for units that appeared in capture but have no register data:
    > STOP: Confirm change control approval before executing this step. If approval is missing, halt and report.
-   `mbpoll -m tcp -a <unit_id> -t3 -r 0 -c 100 <ip>`
-   Response gate: exception 0x01 means the device does not support function 0x03. Try `-t4` for input registers. If both fail, record the unit as limited and move on.
+   `mbpoll -m tcp -1 -0 -a <unit_id> -t 4 -r 0 -c 100 -o 5 <ip>`
+   `-1` polls once so the command returns. `-0` uses PDU addressing so reference 0 is the first register, matching the enumerator in step 5. `-t 4` reads holding registers (function 0x03). `-o 5` sets a 5 second timeout.
+   Response gate: exception 0x01 means the unit rejects function 0x03. Rerun with `-t 3` for input registers (function 0x04). If both fail, record the unit as limited and move on.
 5. Run the bundled enumerator for the standard address windows:
    > STOP: Confirm change control approval before executing this step. If approval is missing, halt and report.
    `python3 scripts/modbus_enumerate.py --host <ip> --unit <unit_id> --out registers.csv`
