@@ -34,35 +34,51 @@ alert tcp any any -> $DNP3_OUTSTATIONS 20000 (msg:"ICS dnp3 auth object probing"
 
 ## Zeek policy
 
-Outstation impersonation. One outstation address served by two source IPs is a rogue master or an impersonated outstation.
+Zeek's DNP3 analyzer exposes `dnp3_header_block`, which carries the link addresses, and `dnp3_application_response_header`, which carries the function code. Save the script as `site/dnp3-anomaly.zeek`. The master opens the connection, so responses always arrive with `is_orig` false.
+
+Outstation impersonation. One outstation link address answered from two different IPs is a rogue master or an impersonated outstation. Unsolicited responses are function code 0x82; outstation behaviour outside the polling schedule is worth an analyst look.
 
 ```zeek
 @load base/protocols/dnp3
+@load base/frameworks/notice
 
-global outstation_sources: table[addr] of set[addr];
+module DNP3Watch;
 
-event dnp3_response(c: connection, is_orig: bool, code: count, fc: count, iin: DNP3::Indicators)
+export {
+    redef enum Notice::Type += {
+        Address_Sharing,
+        Unsolicited_Outside_Polling,
+    };
+
+    ## Outstation link address to the source IPs that have answered for it.
+    global outstation_ips: table[count] of set[addr];
+}
+
+event dnp3_header_block(c: connection, is_orig: bool, len: count, ctrl: count,
+                        dest_addr: count, src_addr: count)
     {
-    local src = c$id$orig_h;
-    local dst = c$id$resp_h;
-    if ( dst !in outstation_sources )
-        outstation_sources[dst] = set();
-    add outstation_sources[dst][src];
-    if ( |outstation_sources[dst]| > 1 )
-        NOTICE([$note=DNP3::Address_Sharing, $src=src, $dst=dst,
-                $msg=fmt("outstation %s addressed by %d masters", dst, |outstation_sources[dst]|)]);
-    }
-```
-
-Unsolicited responses during the polling window. Outstations that push data outside the configured polling schedule may be compromised.
-
-```zeek
-event dnp3_unsolicited_response(c: connection, is_orig: bool, code: count, fc: count, iin: DNP3::Indicators)
-    {
-    if ( ! Site::is_local_addr(c$id$resp_h) )
+    if ( is_orig )
         return;
-    NOTICE([$note=DNP3::Unsolicited_Outside_Polling, $src=c$id$orig_h, $dst=c$id$resp_h,
-            $msg="unsolicited response detected, verify polling schedule"]);
+
+    local ip = c$id$resp_h;
+    if ( src_addr !in outstation_ips )
+        outstation_ips[src_addr] = set();
+    add outstation_ips[src_addr][ip];
+
+    if ( |outstation_ips[src_addr]| > 1 )
+        NOTICE([$note=Address_Sharing, $src=c$id$orig_h, $dst=ip,
+                $msg=fmt("outstation link address %d answered by %s and another IP",
+                         src_addr, ip)]);
+    }
+
+event dnp3_application_response_header(c: connection, is_orig: bool,
+                                       application: count, fc: count, iin: count)
+    {
+    if ( is_orig || fc != 0x82 )
+        return;
+
+    NOTICE([$note=Unsolicited_Outside_Polling, $src=c$id$resp_h, $dst=c$id$orig_h,
+            $msg="unsolicited response from outstation, verify the polling schedule"]);
     }
 ```
 
