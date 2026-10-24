@@ -67,7 +67,7 @@ It must print `Validated N skills. 0 failed.` and exit 0, where N is the total s
 - Writing rules on every markdown file: no em dashes, no banned words, no emojis, no CRLF, no trailing whitespace, no byte order mark.
 - Every bundled Python script compiles and every shell script passes `sh -n`.
 
-CI runs `python scripts/validate_all.py` on every push to `main` and on every pull request, and rejects PRs that fail it. Fix the validator output before requesting review. Do not modify the validator to make a skill pass.
+CI runs `python scripts/validate_all.py` from `.github/workflows/validate.yml` on every push to `main` and on every pull request, and rejects PRs that fail it. Fix the validator output before requesting review. Do not modify the validator to make a skill pass.
 
 ## Safety Rules
 

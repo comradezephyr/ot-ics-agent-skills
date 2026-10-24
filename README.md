@@ -86,7 +86,7 @@ module/skills/
 python scripts/validate_all.py
 ```
 
-The validator prints a count per category and `Validated 42 skills. 0 failed.`, and exits non-zero on any failure. It checks the frontmatter and metadata block, the five sections and their order, the Safety declaration and the STOP and SAFETY gates, every framework row against `references/standards.md`, every reference file against the runbook that must cite it, the writing rules, and that each bundled script parses. CI runs the same command on every push to `main` and on every pull request.
+The validator prints a count per category and `Validated 42 skills. 0 failed.`, and exits non-zero on any failure. It checks the frontmatter and metadata block, the five sections and their order, the Safety declaration and the STOP and SAFETY gates, every framework row against `references/standards.md`, every reference file against the runbook that must cite it, the writing rules, and that each bundled script parses. CI runs the same command from `.github/workflows/validate.yml` on every push to `main` and on every pull request.
 
 ## Safety
 
