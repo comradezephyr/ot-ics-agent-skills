@@ -40,6 +40,7 @@ GOVERNANCE_SAFETY = (
 )
 EMOJI_RE = re.compile("[\U0001F300-\U0001FAFF\u2600-\u27BF]")
 BANNED_RE = re.compile(r"\b(" + "|".join(re.escape(w) for w in BANNED_WORDS) + r")\b", re.I)
+SCRIPT_REF_RE = re.compile(r"(?<![A-Za-z0-9_./\-])scripts/[A-Za-z0-9_.\-]+")
 
 
 def split_frontmatter(text):
@@ -247,6 +248,10 @@ def validate(skill_dir):
                 errors.append(f"references/{reference.name} is never referenced from SKILL.md")
     if "references/standards.md" not in text:
         errors.append("SKILL.md never points at references/standards.md")
+
+    for token in sorted(set(SCRIPT_REF_RE.findall(text))):
+        if not (path / token).is_file():
+            errors.append(f"SKILL.md references {token}, which does not exist")
 
     for markdown in sorted(path.rglob("*.md")):
         check_markdown(markdown, path, errors)
