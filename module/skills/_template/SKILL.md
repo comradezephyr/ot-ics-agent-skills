@@ -23,7 +23,7 @@ metadata:
 
 ## Prerequisites
 
-- pymodbus 3.x. Verify with `pip show pymodbus`.
+- pymodbus 3.10 or newer. Verify with `python -c "import pymodbus; print(pymodbus.__version__)"`.
 - nmap 7.94 or newer with NSE OT scripts. Verify with `nmap --version`.
 - SPAN port or network TAP on the target segment. If unavailable, use <passive-skill-name> instead.
 - Credentials: <list accounts and scopes, and where the agent retrieves them>.
